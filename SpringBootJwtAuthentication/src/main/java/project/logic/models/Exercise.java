@@ -2,6 +2,7 @@ package project.logic.models;
 
 
 import project.auth.model.User;
+import project.logic.dto.ExerciseDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -18,7 +19,6 @@ public class Exercise {
     @Column(nullable = false)
     private String name;
 
-    @NotBlank
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private ExerciseTypes type;
@@ -37,5 +37,14 @@ public class Exercise {
 
     public User getUser() {
         return user;
+    }
+
+    public Exercise() {
+    }
+
+    public Exercise(ExerciseDto exerciseDto, User user) {
+        this.name=exerciseDto.getName();
+        this.type=ExerciseTypes.valueOf(exerciseDto.getType());
+        this.user=user;
     }
 }
