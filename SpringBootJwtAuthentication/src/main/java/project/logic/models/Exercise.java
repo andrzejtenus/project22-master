@@ -1,11 +1,14 @@
 package project.logic.models;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import project.auth.model.User;
 import project.logic.dto.ExerciseDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name="Exercises")
@@ -27,6 +30,10 @@ public class Exercise {
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable=false)
     private User user;
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
+    private List<Training> trainings = new ArrayList<>();
+
     public String getName() {
         return name;
     }
@@ -40,6 +47,10 @@ public class Exercise {
     }
 
     public Exercise() {
+    }
+
+    public Long getId() {
+        return id;
     }
 
     public Exercise(ExerciseDto exerciseDto, User user) {

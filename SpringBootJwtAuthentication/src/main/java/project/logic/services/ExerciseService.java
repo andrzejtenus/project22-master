@@ -22,10 +22,10 @@ import java.util.stream.Collectors;
 public class ExerciseService implements IExerciseService {
 
     @Autowired
-    IExercisesRepository exercisesRepository;
+    private IExercisesRepository exercisesRepository;
 
     @Autowired
-    UserRepository userRepository;
+    private UserRepository userRepository;
 
     @Override
     public List<ExerciseDto> getExercises() {
@@ -33,8 +33,11 @@ public class ExerciseService implements IExerciseService {
     }
 
     @Override
-    public List<ExerciseDto> getExercisesByUserId(Long id) {
-        return null;
+    public List<ExerciseDto> getExercisesByUserId(Long user_id) {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not fund"));
+
+        return exercisesRepository.findByUser(user).stream().map(ExerciseDto::new).collect(Collectors.toList());
     }
 
     @Override

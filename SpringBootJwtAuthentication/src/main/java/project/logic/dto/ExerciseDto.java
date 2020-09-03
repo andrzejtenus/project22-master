@@ -20,9 +20,18 @@ public class ExerciseDto {
     private Long user;
 
     public ExerciseDto(Exercise exercise) {
+        this.id=exercise.getId();
         this.name = exercise.getName();
         this.type=exercise.getType().toString();
         this.user=exercise.getUser().getId();
+    }
+    public ExerciseDto() {
+    }
+
+
+
+    public Long getId() {
+        return id;
     }
 
     public String getName() {
@@ -37,6 +46,5 @@ public class ExerciseDto {
         return user;
     }
 
-    public ExerciseDto() {
-    }
+
 }

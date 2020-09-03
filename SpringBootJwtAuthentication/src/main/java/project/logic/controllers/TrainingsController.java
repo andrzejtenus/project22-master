@@ -1,5 +1,6 @@
 package project.logic.controllers;
 
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,19 +8,20 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import project.auth.security.jwt.JwtProvider;
-import project.logic.dto.ExerciseDto;
+import project.logic.dto.TrainingDto;
 import project.logic.exceptions.ConflictException;
-import project.logic.interfaces.services.IExerciseService;
+import project.logic.interfaces.services.ITrainingService;
 
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping("/api/exercises")
+@RequestMapping("/api/trainings")
 @PreAuthorize("hasRole('USER')")
 @ResponseBody
-public class ExercisesController {
+public class TrainingsController {
+
     @Autowired
-    private IExerciseService exerciseService;
+    private ITrainingService trainingService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -28,21 +30,20 @@ public class ExercisesController {
     private JwtProvider jwtProvider;
 
     @GetMapping
-    public ResponseEntity getExercises() throws JsonProcessingException {
-        return ResponseEntity.ok(objectMapper.writeValueAsString(exerciseService.getExercises()));
+    public ResponseEntity getTrainings() throws JsonProcessingException {
+        return ResponseEntity.ok(objectMapper.writeValueAsString(trainingService.getTraining()));
     }
     @RequestMapping("/user")
     @GetMapping
-    public ResponseEntity getUserExercises(@RequestHeader (name="Authorization") String token ) throws JsonProcessingException {
+    public ResponseEntity getUserTrainings(@RequestHeader(name="Authorization") String token ) throws JsonProcessingException {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
-        return ResponseEntity.ok(objectMapper.writeValueAsString(exerciseService.getExercisesByUserId(userId)));
+        return ResponseEntity.ok(objectMapper.writeValueAsString(trainingService.getTrainingByUserId(userId)));
     }
 
     @PostMapping
-    public ResponseEntity addUserExercise(@Valid @RequestBody ExerciseDto exerciseDto,
-                                      @RequestHeader (name="Authorization") String token ) throws ConflictException {
+    public ResponseEntity addUserTrainings(@Valid @RequestBody TrainingDto trainingDto,
+                                           @RequestHeader (name="Authorization") String token ) throws ConflictException {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
-        return ResponseEntity.ok(exerciseService.addExercise(exerciseDto, userId));
+        return ResponseEntity.ok(trainingService.addTraining(trainingDto, userId));
     }
-
 }
