@@ -47,3 +47,4 @@ public class TrainingsController {
         return ResponseEntity.ok(trainingService.addTraining(trainingDto, userId));
     }
 }
+
