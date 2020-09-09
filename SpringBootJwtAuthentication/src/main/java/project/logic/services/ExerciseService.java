@@ -31,7 +31,6 @@ public class ExerciseService implements IExerciseService {
     public List<ExerciseDto> getExercises() {
              return exercisesRepository.findAll().stream().map(ExerciseDto::new).collect(Collectors.toList());
     }
-
     @Override
     public List<ExerciseDto> getExercisesByUserId(Long user_id) {
         User user = userRepository.findById(user_id)
@@ -42,12 +41,16 @@ public class ExerciseService implements IExerciseService {
 
     @Override
     public List<ExerciseDto> getExercisesByType(ExerciseTypes type) {
+
         return null;
     }
 
     @Override
-    public List<ExerciseDto> getExercisesByUserIdAndType(Long id, ExerciseTypes type) {
-        return null;
+    public List<ExerciseDto> getExercisesByUserIdAndType(Long user_id, ExerciseTypes type) {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not fund"));
+        return exercisesRepository.findByUserAndType(user, type).stream()
+                .map(ExerciseDto::new).collect(Collectors.toList());
     }
 
     @Override

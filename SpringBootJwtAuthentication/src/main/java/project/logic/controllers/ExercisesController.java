@@ -10,12 +10,13 @@ import project.auth.security.jwt.JwtProvider;
 import project.logic.dto.ExerciseDto;
 import project.logic.exceptions.ConflictException;
 import project.logic.interfaces.services.IExerciseService;
+import project.logic.models.ExerciseTypes;
 
 import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/api/exercises")
-@PreAuthorize("hasRole('USER')")
+//@PreAuthorize("hasRole('USER')")
 @ResponseBody
 public class ExercisesController {
     @Autowired
@@ -37,7 +38,13 @@ public class ExercisesController {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(objectMapper.writeValueAsString(exerciseService.getExercisesByUserId(userId)));
     }
-
+    @RequestMapping("/user/{type}")
+    @GetMapping
+    public ResponseEntity getUserExercisesByType(@RequestHeader (name="Authorization") String token, @PathVariable("type") final ExerciseTypes type) throws JsonProcessingException {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(objectMapper.writeValueAsString(exerciseService
+                .getExercisesByUserIdAndType(userId, type)));
+    }
     @PostMapping
     public ResponseEntity addUserExercise(@Valid @RequestBody ExerciseDto exerciseDto,
                                       @RequestHeader (name="Authorization") String token ) throws ConflictException {
