@@ -32,10 +32,20 @@ public class PlansController {
         return ResponseEntity.ok(objectMapper.writeValueAsString(plansService.getAllPlans()));
     }
 
+    @RequestMapping("/user")
+    @GetMapping
+    public ResponseEntity getUserPlans(@RequestHeader (name="Authorization") String token)
+            throws JsonProcessingException {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(objectMapper.writeValueAsString(plansService.getAllUserPlans(userId)));
+    }
+
+
     @PostMapping
     public ResponseEntity addUserPlan(@Valid @RequestBody PlanDto planDto,
                                            @RequestHeader (name="Authorization") String token ){
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(plansService.addPlanForUser(userId, planDto));
     }
+
 }
