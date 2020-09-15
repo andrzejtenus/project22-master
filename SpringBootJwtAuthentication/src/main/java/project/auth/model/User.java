@@ -13,6 +13,7 @@ import javax.validation.constraints.Size;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.NaturalId;
 import project.logic.models.Exercise;
+import project.logic.models.Plan;
 import project.logic.models.Training;
 
 @Entity
@@ -60,6 +61,10 @@ public class User{
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Training> trainings = new ArrayList<>();
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<Plan> plans = new ArrayList<>();
 
     public User() {}
 

@@ -48,9 +48,9 @@ public class TrainingService implements ITrainingService {
     @Override
     public TrainingDto addTraining(TrainingDto trainingDto, Long user_id) throws ConflictException {
         User user = userRepository.findById(user_id)
-                .orElseThrow(()-> new NotFoundException("User not fund"));
-        Exercise exercise = exercisesRepository.findById(trainingDto.getExercise()).
-                orElseThrow(()-> new NotFoundException("Exercise not fund"));
+                .orElseThrow(()-> new NotFoundException("User not found"));
+        Exercise exercise = exercisesRepository.findByUserAndName(user,trainingDto.getExercise()).
+                orElseThrow(()-> new NotFoundException("Exercise not found"));
         Optional<Training> training = trainingRepository.findByUserAndExerciseAndSet(user, exercise
                 , trainingDto.getSet());
         if(training.isPresent())

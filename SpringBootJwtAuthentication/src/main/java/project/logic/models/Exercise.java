@@ -34,6 +34,10 @@ public class Exercise {
     @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
     private List<Training> trainings = new ArrayList<>();
 
+    @JsonIgnore
+    @OneToMany(mappedBy = "exercise", cascade = CascadeType.ALL)
+    private List<Plan> plans = new ArrayList<>();
+
     public String getName() {
         return name;
     }
@@ -49,7 +53,7 @@ public class Exercise {
     public Exercise() {
     }
 
-    public Long getId() {
+    public Long getId() {   
         return id;
     }
 

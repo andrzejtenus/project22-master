@@ -12,4 +12,7 @@ public interface IExercisesRepository extends JpaRepository<Exercise, Long> {
     Optional<Exercise> findByUserAndNameAndType(User user, String name, ExerciseTypes type);
     List<Exercise> findByUserAndType(User user, ExerciseTypes type);
     List<Exercise> findByUser(User user);
+    Optional<Exercise> findByUserAndName(User user, String name);
+
 }
+

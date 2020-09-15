@@ -12,7 +12,7 @@ public class TrainingDto {
     private Long user;
 
     @NotNull(message = "Exercise can not be empty")
-    private Long exercise;
+    private String exercise;
 
     @NotNull(message = "Day can not be empty")
     private java.sql.Timestamp day;
@@ -30,7 +30,7 @@ public class TrainingDto {
     public TrainingDto(Training training) {
         this.id = training.getId();
         this.user = training.getUser().getId();
-        this.exercise = training.getExercise().getId();
+        this.exercise = training.getExercise().getName();
         this.day = training.getDay();
         this.weight = training.getWeight();
         this.set = training.getSet();
@@ -45,7 +45,7 @@ public class TrainingDto {
         this.user = user;
     }
 
-    public void setExercise(Long exercise) {
+    public void setExercise(String exercise) {
         this.exercise = exercise;
     }
 
@@ -73,7 +73,7 @@ public class TrainingDto {
         return user;
     }
 
-    public Long getExercise() {
+    public String getExercise() {
         return exercise;
     }
 
