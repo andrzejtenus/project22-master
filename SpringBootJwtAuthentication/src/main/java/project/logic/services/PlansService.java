@@ -45,7 +45,10 @@ public class PlansService implements IPlansService {
 
     @Override
     public List<PlanDto> getAllUserPlansByDay(Long id, Timestamp day) {
-        return null;
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("User not found"));
+        return plansRepository.getPlanByUserAndDay(user, day).stream().map(PlanDto::new)
+                .collect(Collectors.toList());
     }
 
     @Override

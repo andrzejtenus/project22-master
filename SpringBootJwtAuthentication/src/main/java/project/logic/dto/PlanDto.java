@@ -26,6 +26,9 @@ public class PlanDto {
     @NotNull(message = "Reps can not be empty")
     private java.lang.Integer reps;
 
+    @NotNull(message = "RPE can not be empty")
+    private java.lang.Integer rpe;
+
     public PlanDto(Plan plan) {
         this.id = plan.getId();
         this.user = plan.getUser().getId();
@@ -34,9 +37,18 @@ public class PlanDto {
         this.weight = plan.getWeight();
         this.sets = plan.getSets();
         this.reps = plan.getReps();
+        this.rpe=plan.getRpe();
     }
 
     public PlanDto() {
+    }
+
+    public Integer getRpe() {
+        return rpe;
+    }
+
+    public void setRpe(Integer rpe) {
+        this.rpe = rpe;
     }
 
     public Long getId() {

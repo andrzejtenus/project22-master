@@ -38,6 +38,10 @@ public class Plan {
     @Column(nullable = false)
     private java.lang.Integer reps;
 
+    @NonNull
+    @Column(nullable = false)
+    private java.lang.Integer rpe;
+
     public Plan(PlanDto planDto, User user, Exercise exercise) {
         this.user = user;
         this.exercise = exercise;
@@ -45,6 +49,16 @@ public class Plan {
         this.weight = planDto.getWeight();
         this.sets = planDto.getSets();
         this.reps = planDto.getReps();
+        this.rpe=planDto.getRpe();
+
+    }
+
+    public Integer getRpe() {
+        return rpe;
+    }
+
+    public void setRpe(Integer rpe) {
+        this.rpe = rpe;
     }
 
     public Long getId() {
