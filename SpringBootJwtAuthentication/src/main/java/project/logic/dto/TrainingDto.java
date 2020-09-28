@@ -3,6 +3,7 @@ package project.logic.dto;
 import project.logic.models.Training;
 
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class TrainingDto {
@@ -15,7 +16,7 @@ public class TrainingDto {
     private String exercise;
 
     @NotNull(message = "Day can not be empty")
-    private java.sql.Timestamp day;
+    private java.sql.Date day;
 
     @NotNull(message = "Weight can not be empty")
     private java.lang.Integer weight;
@@ -49,9 +50,6 @@ public class TrainingDto {
         this.exercise = exercise;
     }
 
-    public void setDay(Timestamp day) {
-        this.day = day;
-    }
 
     public void setWeight(Integer weight) {
         this.weight = weight;
@@ -77,8 +75,12 @@ public class TrainingDto {
         return exercise;
     }
 
-    public Timestamp getDay() {
+    public Date getDay() {
         return day;
+    }
+
+    public void setDay(Date day) {
+        this.day = day;
     }
 
     public Integer getWeight() {

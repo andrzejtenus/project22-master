@@ -2,6 +2,8 @@ package project.logic.models;
 
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import project.auth.model.User;
 import project.logic.dto.ExerciseDto;
 
@@ -28,6 +30,7 @@ public class Exercise {
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id", nullable=false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
     @JsonIgnore

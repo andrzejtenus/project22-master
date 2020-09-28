@@ -7,6 +7,7 @@ import project.logic.dto.TrainingDto;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -26,7 +27,7 @@ public class Training {
 
     @NonNull
     @Column(nullable = false)
-    private java.sql.Timestamp day;
+    private java.sql.Date day;
 
     @NonNull
     @Column(nullable = false)
@@ -64,7 +65,11 @@ public class Training {
         this.exercise = exercise;
     }
 
-    public void setDay(Timestamp day) {
+    public Date getDay() {
+        return day;
+    }
+
+    public void setDay(Date day) {
         this.day = day;
     }
 
@@ -92,9 +97,6 @@ public class Training {
         return exercise;
     }
 
-    public Timestamp getDay() {
-        return day;
-    }
 
     public Integer getWeight() {
         return weight;

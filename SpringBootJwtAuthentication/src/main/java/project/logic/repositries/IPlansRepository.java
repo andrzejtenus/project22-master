@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface IPlansRepository extends JpaRepository<Plan, Long> {
     List<Plan> getPlanByUser(User user);
-    List<Plan> getPlanByUserAndDay(User user, Timestamp day);
+    List<Plan> getPlanByUserAndDay(User user, java.sql.Date day);
 }

@@ -63,4 +63,12 @@ public class ExerciseService implements IExerciseService {
             throw new ConflictException("Exercise already exists");
         return new ExerciseDto(exercisesRepository.save(new Exercise(exerciseDto, user)));
     }
+    @Override
+    public void deleteExercise(Long id, Long user_id){
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not fund"));
+        Exercise exercise = exercisesRepository.findByUserAndId(user, user_id)
+                .orElseThrow(()-> new NotFoundException("Exercise not fund"));
+        exercisesRepository.delete(exercise);
+    }
 }

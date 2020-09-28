@@ -41,7 +41,7 @@ public class TrainingService implements ITrainingService {
     }
 
     @Override
-    public List<TrainingDto> getTrainingByUserIdAndDate(Long id, Timestamp day) {
+    public List<TrainingDto> getTrainingByUserIdAndDate(Long id, java.sql.Date day) {
         return null;
     }
 

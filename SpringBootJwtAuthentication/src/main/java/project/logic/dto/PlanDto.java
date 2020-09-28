@@ -3,7 +3,10 @@ package project.logic.dto;
 import project.logic.models.Plan;
 import project.logic.models.Training;
 
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 public class PlanDto {
@@ -15,7 +18,7 @@ public class PlanDto {
     private String exercise;
 
     @NotNull(message = "Day can not be empty")
-    private java.sql.Timestamp day;
+    private java.sql.Date day;
 
     @NotNull(message = "Weight can not be empty")
     private java.lang.Integer weight;
@@ -27,6 +30,8 @@ public class PlanDto {
     private java.lang.Integer reps;
 
     @NotNull(message = "RPE can not be empty")
+    @Min(0)
+    @Max(10)
     private java.lang.Integer rpe;
 
     public PlanDto(Plan plan) {
@@ -75,11 +80,11 @@ public class PlanDto {
         this.exercise = exercise;
     }
 
-    public Timestamp getDay() {
+    public Date getDay() {
         return day;
     }
 
-    public void setDay(Timestamp day) {
+    public void setDay(Date day) {
         this.day = day;
     }
 

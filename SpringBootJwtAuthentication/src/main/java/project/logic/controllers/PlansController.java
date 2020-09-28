@@ -50,7 +50,7 @@ public class PlansController {
     }
     @RequestMapping("/user/{day}")
     @GetMapping
-    public ResponseEntity getUserPlansByDay(@PathVariable(value = "day") Timestamp day, @RequestHeader (name="Authorization") String token)
+    public ResponseEntity getUserPlansByDay(@PathVariable(value = "day") java.sql.Date day, @RequestHeader (name="Authorization") String token)
             throws JsonProcessingException {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(objectMapper.writeValueAsString(plansService.getAllUserPlansByDay(userId, day)));

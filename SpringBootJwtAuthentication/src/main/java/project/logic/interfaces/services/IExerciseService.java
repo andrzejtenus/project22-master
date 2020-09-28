@@ -13,4 +13,6 @@ public interface IExerciseService {
     public abstract List<ExerciseDto> getExercisesByType(ExerciseTypes type);
     public abstract List<ExerciseDto> getExercisesByUserIdAndType(Long id, ExerciseTypes type);
     public abstract ExerciseDto addExercise(ExerciseDto exerciseDto, Long user_id ) throws ConflictException;
+
+    void deleteExercise(Long id, Long user_id);
 }

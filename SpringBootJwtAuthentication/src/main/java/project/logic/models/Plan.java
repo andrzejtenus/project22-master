@@ -5,6 +5,7 @@ import project.auth.model.User;
 import project.logic.dto.PlanDto;
 
 import javax.persistence.*;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @Entity
@@ -24,7 +25,7 @@ public class Plan {
 
     @NonNull
     @Column(nullable = false)
-    private java.sql.Timestamp day;
+    private java.sql.Date day;
 
     @NonNull
     @Column(nullable = false)
@@ -85,11 +86,11 @@ public class Plan {
         this.exercise = exercise;
     }
 
-    public Timestamp getDay() {
+    public Date getDay() {
         return day;
     }
 
-    public void setDay(Timestamp day) {
+    public void setDay(Date day) {
         this.day = day;
     }
 

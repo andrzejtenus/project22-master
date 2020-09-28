@@ -11,9 +11,6 @@ import project.logic.models.Exercise;
 import project.logic.models.Plan;
 import project.logic.repositries.IExercisesRepository;
 import project.logic.repositries.IPlansRepository;
-import project.logic.repositries.ITrainingRepository;
-
-import java.sql.Timestamp;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -44,7 +41,7 @@ public class PlansService implements IPlansService {
     }
 
     @Override
-    public List<PlanDto> getAllUserPlansByDay(Long id, Timestamp day) {
+    public List<PlanDto> getAllUserPlansByDay(Long id, java.sql.Date day) {
         User user = userRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("User not found"));
         return plansRepository.getPlanByUserAndDay(user, day).stream().map(PlanDto::new)
@@ -52,7 +49,7 @@ public class PlansService implements IPlansService {
     }
 
     @Override
-    public List<PlanDto> getAllUserPlansForCurrentWeak(Long id, Timestamp day) {
+    public List<PlanDto> getAllUserPlansForCurrentWeak(Long id, java.sql.Date day) {
         return null;
     }
 

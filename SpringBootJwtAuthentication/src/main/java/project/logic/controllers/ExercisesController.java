@@ -38,9 +38,10 @@ public class ExercisesController {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(objectMapper.writeValueAsString(exerciseService.getExercisesByUserId(userId)));
     }
-    @RequestMapping("/user/{type}")
+    @RequestMapping("/user/type/{type}")
     @GetMapping
-    public ResponseEntity getUserExercisesByType(@RequestHeader (name="Authorization") String token, @PathVariable("type") final ExerciseTypes type) throws JsonProcessingException {
+    public ResponseEntity getUserExercisesByType(@RequestHeader (name="Authorization") String token,
+                                                 @PathVariable("type") final ExerciseTypes type) throws JsonProcessingException {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(objectMapper.writeValueAsString(exerciseService
                 .getExercisesByUserIdAndType(userId, type)));
@@ -51,5 +52,14 @@ public class ExercisesController {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(exerciseService.addExercise(exerciseDto, userId));
     }
+    @RequestMapping("/user/{id}")
+    @DeleteMapping
+    public ResponseEntity deleteExercise(@RequestHeader (name="Authorization") String token,
+                                         @PathVariable("id") final Long id){
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        exerciseService.deleteExercise(id, userId);
+        return ResponseEntity.ok("exercise has been deleted");
+    }
+
 
 }
