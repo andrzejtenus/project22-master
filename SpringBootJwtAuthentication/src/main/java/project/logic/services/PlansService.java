@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.auth.model.User;
 import project.auth.repository.UserRepository;
+import project.logic.dto.ExerciseDto;
 import project.logic.dto.PlanDto;
 import project.logic.exceptions.NotFoundException;
 import project.logic.interfaces.services.IPlansService;
@@ -11,6 +12,9 @@ import project.logic.models.Exercise;
 import project.logic.models.Plan;
 import project.logic.repositries.IExercisesRepository;
 import project.logic.repositries.IPlansRepository;
+
+import javax.xml.crypto.Data;
+import java.sql.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -61,5 +65,23 @@ public class PlansService implements IPlansService {
                 orElseThrow(()-> new NotFoundException("Exercise not found"));
 
         return new PlanDto(plansRepository.save(new Plan(planDto,user,exercise)));
+    }
+    @Override
+    public List<PlanDto> gatPlansFormRange()
+    {
+        return plansRepository.getPlanByDayGreaterThanEqualAndDayLessThanEqual(Date.valueOf("2020-10-01"), Date.valueOf("2020-10-04")).stream().map(PlanDto::new)
+               .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<PlanDto> gatPlansFormRangeByUserAndExercise(Long user_id, ExerciseDto exerciseDto)
+    {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not found"));
+        Exercise exercise = exercisesRepository.findByUserAndId(user,exerciseDto.getId()).
+                orElseThrow(()-> new NotFoundException("Exercise not found"));
+        return plansRepository.getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc(Date.valueOf("2020-10-01"),
+                Date.valueOf("2020-10-04"), user, exercise).stream().map(PlanDto::new)
+                .collect(Collectors.toList());
     }
 }

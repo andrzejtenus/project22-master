@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.auth.security.jwt.JwtProvider;
+import project.logic.dto.ExerciseDto;
 import project.logic.dto.PlanDto;
 import project.logic.dto.TrainingDto;
 import project.logic.exceptions.ConflictException;
@@ -55,6 +56,11 @@ public class PlansController {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(objectMapper.writeValueAsString(plansService.getAllUserPlansByDay(userId, day)));
     }
-
+    @RequestMapping("/test")
+    public ResponseEntity gettest(@RequestHeader (name="Authorization") String token, @Valid @RequestBody ExerciseDto exerciseDto)
+    {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(plansService.gatPlansFormRangeByUserAndExercise(userId, exerciseDto));
+    }
 
 }
