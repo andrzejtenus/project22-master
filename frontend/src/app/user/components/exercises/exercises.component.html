@@ -1,0 +1,56 @@
+<div>
+<table mat-table [dataSource]="mainLifts" class="mat-elevation-z8">
+  <ng-container matColumnDef="Lifts">
+    <th mat-header-cell *matHeaderCellDef> Main Lifts </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}}
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-form-field appearance="fill">
+  <mat-label>Type main lift name</mat-label>
+  <input matInput type="text" #mainlift>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="addLift(mainlift.value, 'MAIN_LIFT')">Save</button>
+</div>
+
+<div>
+<table mat-table [dataSource]="supportLifts" class="mat-elevation-z8">
+
+  <ng-container matColumnDef="Lifts">
+    <th mat-header-cell *matHeaderCellDef> Support Lifts </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-form-field appearance="fill">
+  <mat-label>Type support lift name</mat-label>
+  <input matInput type="text" #supplift>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="addLift(supplift.value, 'SUPPORT_LIFT')">Save</button>
+</div>
+
+
+<div>
+<table mat-table [dataSource]="accessories" class="mat-elevation-z8">
+  <ng-container matColumnDef="Lifts">
+    <th mat-header-cell *matHeaderCellDef> Accessories </th>
+    <td mat-cell *matCellDef="let element"> {{element.name}}</td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+<mat-form-field appearance="fill">
+  <mat-label>Type accessory name</mat-label>
+  <input matInput type="text" #acclift>
+</mat-form-field>
+<button mat-raised-button color="primary" (click)="addLift(acclift.value, 'ACCESSORY')">Save</button>
+</div>
+
+
+
+

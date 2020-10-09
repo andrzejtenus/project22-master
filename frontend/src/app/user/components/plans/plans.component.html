@@ -1,0 +1,88 @@
+
+
+
+<div>
+  <button class="change_day_button" mat-raised-button color="accent" (click)="previousDay()" >
+    <mat-icon>navigate_before</mat-icon>
+  </button>
+
+  <button class="days_button" mat-raised-button color="accent" >{{myDate | date: 'fullDate' }}</button>
+
+  <button class="change_day_button" mat-raised-button color="accent" (click)="nextDay()" >
+    <mat-icon>navigate_next</mat-icon>
+  </button>
+
+  <table mat-table [dataSource]="plan" class="mat-elevation-z8">
+    <ng-container matColumnDef="Exercise">
+      <th mat-header-cell *matHeaderCellDef> Exercise </th>
+      <td mat-cell *matCellDef="let element"> {{element.exercise}}
+    </ng-container>
+    <ng-container matColumnDef="Sets">
+      <th mat-header-cell *matHeaderCellDef> Sets </th>
+      <td mat-cell *matCellDef="let element"> {{element.sets}}
+    </ng-container>
+    <ng-container matColumnDef="Reps">
+      <th mat-header-cell *matHeaderCellDef> Reps </th>
+      <td mat-cell *matCellDef="let element"> {{element.reps}}
+    </ng-container>
+    <ng-container matColumnDef="Weight">
+      <th mat-header-cell *matHeaderCellDef> Weight </th>
+      <td mat-cell *matCellDef="let element"> {{element.weight}}
+    </ng-container>
+    <ng-container matColumnDef="RPE">
+      <th mat-header-cell *matHeaderCellDef> RPE </th>
+      <td mat-cell *matCellDef="let element"> {{element.rpe}}
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-form-field appearance="fill" class="selectType">
+    <mat-label>Lift Type</mat-label>
+    <mat-select [(ngModel)]="liftType" (selectionChange)="initExercises()"  >
+      <mat-option *ngFor="let lift of liftTypes" [value]="lift.valueOf()">
+        {{lift.valueOf()}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="selectExercise">
+    <mat-label>Exercise</mat-label>
+    <mat-select [(ngModel)]="exercise">
+      <mat-option *ngFor="let exercise of exercises" [value]="exercise.name">
+        {{exercise.name}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>Sets</mat-label>
+    <input matInput type="number" min="1" max="50" #sets>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>Reps</mat-label>
+    <input matInput type="number" min="1" max="200" #reps>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>Weight</mat-label>
+    <input matInput type="number"  #weight>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill" class="input">
+    <mat-label>RPE</mat-label>
+    <input matInput type="number" min="0" max="10" #rpe>
+  </mat-form-field>
+
+  <button class="savePlan" mat-raised-button color="accent"
+          (click)="savePlan(exercise.valueOf(),myDate, weight.valueAsNumber, sets.valueAsNumber, reps.valueAsNumber, rpe.valueAsNumber)" >
+    <mat-icon>save</mat-icon>
+    save
+  </button>
+</div>
+
+<div>
+<p-chart type="line" [data]="data"></p-chart>
+<div>
