@@ -16,6 +16,7 @@ import project.logic.repositries.IPlansRepository;
 import javax.xml.crypto.Data;
 import java.sql.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -74,14 +75,16 @@ public class PlansService implements IPlansService {
     }
 
     @Override
-    public List<PlanDto> gatPlansFormRangeByUserAndExercise(Long user_id, ExerciseDto exerciseDto)
+    public List<PlanDto> gatPlansFormRangeByUserAndExercise(Long user_id,Long exercise_id, java.sql.Date start, java.sql.Date end)
     {
         User user = userRepository.findById(user_id)
                 .orElseThrow(()-> new NotFoundException("User not found"));
-        Exercise exercise = exercisesRepository.findByUserAndId(user,exerciseDto.getId()).
-                orElseThrow(()-> new NotFoundException("Exercise not found"));
-        return plansRepository.getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc(Date.valueOf("2020-10-01"),
-                Date.valueOf("2020-10-04"), user, exercise).stream().map(PlanDto::new)
-                .collect(Collectors.toList());
+        Exercise exercise = exercisesRepository.findById(exercise_id).orElseThrow(()-> new NotFoundException("Exercise not found"));
+        if(exercise.getUser().equals(user)) {
+            return plansRepository.getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc(start,
+                    end, user, exercise).stream().map(PlanDto::new)
+                    .collect(Collectors.toList());
+        }
+        throw new NotFoundException("exercise not found");
     }
 }

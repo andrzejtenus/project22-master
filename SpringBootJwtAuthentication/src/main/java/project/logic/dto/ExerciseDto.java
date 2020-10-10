@@ -15,7 +15,7 @@ public class ExerciseDto {
     private String name;
 
     @NotBlank(message = "Set exercise type")
-    private String type;
+    private String type; 
 
     private Long user;
 

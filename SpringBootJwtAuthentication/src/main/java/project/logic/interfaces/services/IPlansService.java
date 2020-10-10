@@ -2,6 +2,7 @@ package project.logic.interfaces.services;
 
 import project.logic.dto.ExerciseDto;
 import project.logic.dto.PlanDto;
+import project.logic.models.Exercise;
 
 import java.util.List;
 
@@ -14,5 +15,6 @@ public interface IPlansService {
 
     List<PlanDto> gatPlansFormRange();
 
-    List<PlanDto> gatPlansFormRangeByUserAndExercise(Long user_id, ExerciseDto exerciseDto);
+    List<PlanDto> gatPlansFormRangeByUserAndExercise(Long user_id, Long exercise_id
+            , java.sql.Date start, java.sql.Date end);
 }

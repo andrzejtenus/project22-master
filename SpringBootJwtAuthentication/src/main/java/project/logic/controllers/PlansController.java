@@ -15,6 +15,7 @@ import project.logic.interfaces.services.IPlansService;
 import project.logic.repositries.IPlansRepository;
 
 import javax.validation.Valid;
+import java.sql.Date;
 import java.sql.Timestamp;
 
 @RestController
@@ -56,11 +57,15 @@ public class PlansController {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(objectMapper.writeValueAsString(plansService.getAllUserPlansByDay(userId, day)));
     }
-    @RequestMapping("/test")
-    public ResponseEntity gettest(@RequestHeader (name="Authorization") String token, @Valid @RequestBody ExerciseDto exerciseDto)
+    @RequestMapping("/test/{id}")
+    @GetMapping
+    public ResponseEntity gettest(@RequestHeader (name="Authorization") String token,
+            @PathVariable(value = "id") Long id,@RequestParam String start, @RequestParam String end)
     {
-        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
-        return ResponseEntity.ok(plansService.gatPlansFormRangeByUserAndExercise(userId, exerciseDto));
+        //Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        //return ResponseEntity.ok(plansService.
+         //       gatPlansFormRangeByUserAndExercise(userId, id, Date.valueOf("2020-10-01"), Date.valueOf("2020-10-05")));
+        return ResponseEntity.ok(start+end);
     }
 
 }
