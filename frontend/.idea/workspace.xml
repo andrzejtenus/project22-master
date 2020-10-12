@@ -10,14 +10,7 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="272feff0-3d7c-4a0b-bd5d-db9970b2c2b7" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../SpringBootJwtAuthentication/src/main/java/project/logic/controllers/PlansController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringBootJwtAuthentication/src/main/java/project/logic/controllers/PlansController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SpringBootJwtAuthentication/src/main/java/project/logic/dto/ExerciseDto.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringBootJwtAuthentication/src/main/java/project/logic/dto/ExerciseDto.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SpringBootJwtAuthentication/src/main/java/project/logic/interfaces/services/IPlansService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringBootJwtAuthentication/src/main/java/project/logic/interfaces/services/IPlansService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../SpringBootJwtAuthentication/src/main/java/project/logic/services/PlansService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../SpringBootJwtAuthentication/src/main/java/project/logic/services/PlansService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-    </list>
+    <list default="true" id="272feff0-3d7c-4a0b-bd5d-db9970b2c2b7" name="Default Changelist" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -125,6 +118,7 @@
       <workItem from="1601739862484" duration="5678000" />
       <workItem from="1602232397922" duration="5969000" />
       <workItem from="1602340412141" duration="1458000" />
+      <workItem from="1602522535013" duration="24000" />
     </task>
     <servers />
   </component>
@@ -163,10 +157,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="574" y="148" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1599355270863" />
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1602340581800">
+    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1602522554015">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1602340581800" />
+    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1602522554015" />
     <state width="1493" height="264" key="GridCell.Tab.0.bottom" timestamp="1602269832670">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
