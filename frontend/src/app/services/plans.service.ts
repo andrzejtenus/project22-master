@@ -3,11 +3,14 @@ import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs';
 import {environment} from '../../environments/environment';
 import {Exercise} from './exercises.service';
+import {share} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PlansService {
+
+  currPlan: Plan;
 
   constructor(private httpClient: HttpClient) { }
 
@@ -23,6 +26,20 @@ export class PlansService {
     this.httpClient.post(environment.apiUrl + '/api/plans', {exercise: exercise.toString()
       , day: day.toString(), weight: weight.toString(), sets: sets.toString(), reps: reps.toString(), rpe: rpe.toString()} )
       .toPromise().then((data: Exercise) => { console.log(data); });
+  }
+
+  public async addPlan2(exercise: string, day: string, weight: number, sets: number, reps: number, rpe: number): Promise<Plan> {
+      const resp = await this.httpClient.post<Plan>(environment.apiUrl + '/api/plans', {
+      exercise: exercise.toString()
+      ,
+      day: day.toString(),
+      weight: weight.toString(),
+      sets: sets.toString(),
+      reps: reps.toString(),
+      rpe: rpe.toString()
+    });
+      console.log(resp);
+      return null;
   }
 
 }
