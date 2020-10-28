@@ -31,7 +31,7 @@ public class Training {
 
     @NonNull
     @Column(nullable = false)
-    private java.lang.Integer weight;
+    private java.lang.Double weight;
 
     @NonNull
     @Column(nullable = false, name = "_set")
@@ -41,6 +41,16 @@ public class Training {
     @Column(nullable = false)
     private java.lang.Integer reps;
 
+    @NonNull
+    @Column(nullable = false)
+    private java.lang.Integer rpe;
+
+    @Column
+    private java.lang.Double estimatedMax;
+
+    @Column
+    private java.lang.Double volume;
+
     public Training(TrainingDto trainingDto, Exercise exercise, User user) {
         this.user = user;
         this.exercise = exercise;
@@ -48,9 +58,46 @@ public class Training {
         this.weight = trainingDto.getWeight();
         this.set = trainingDto.getSet();
         this.reps = trainingDto.getReps();
+        this.rpe=trainingDto.getRpe();
+        calculateEstimatedMax();
+        calculateVolume();
+
+    }
+
+    private void calculateEstimatedMax()
+    {
+        this.estimatedMax=(this.weight * (this.reps+(10-this.rpe)))/30 + weight;
+    }
+    private void calculateVolume()
+    {
+        this.volume= this.weight * this.set * this.reps;
     }
 
     public Training() {
+    }
+
+    public Integer getRpe() {
+        return rpe;
+    }
+
+    public void setRpe(Integer rpe) {
+        this.rpe = rpe;
+    }
+
+    public Double getEstimatedMax() {
+        return estimatedMax;
+    }
+
+    public void setEstimatedMax(Double estimatedMax) {
+        this.estimatedMax = estimatedMax;
+    }
+
+    public Double getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Double volume) {
+        this.volume = volume;
     }
 
     public void setId(Long id) {
@@ -73,7 +120,7 @@ public class Training {
         this.day = day;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
@@ -98,7 +145,7 @@ public class Training {
     }
 
 
-    public Integer getWeight() {
+    public Double getWeight() {
         return weight;
     }
 

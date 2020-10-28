@@ -29,7 +29,7 @@ public class Plan {
 
     @NonNull
     @Column(nullable = false)
-    private java.lang.Integer weight;
+    private java.lang.Double weight;
 
     @NonNull
     @Column(nullable = false, name = "sets")
@@ -43,6 +43,12 @@ public class Plan {
     @Column(nullable = false)
     private java.lang.Integer rpe;
 
+    @Column
+    private java.lang.Double estimatedMax;
+
+    @Column
+    private java.lang.Double volume;
+
     public Plan(PlanDto planDto, User user, Exercise exercise) {
         this.user = user;
         this.exercise = exercise;
@@ -51,7 +57,33 @@ public class Plan {
         this.sets = planDto.getSets();
         this.reps = planDto.getReps();
         this.rpe=planDto.getRpe();
+        calculateEstimatedMax();
+        calculateVolume();
+    }
 
+    private void calculateEstimatedMax()
+    {
+        this.estimatedMax=(this.weight * (this.reps+(10-this.rpe)))/30 + weight;
+    }
+    private void calculateVolume()
+    {
+        this.volume= this.weight * this.sets * this.reps;
+    }
+
+    public Double getEstimatedMax() {
+        return estimatedMax;
+    }
+
+    public void setEstimatedMax(Double estimatedMax) {
+        this.estimatedMax = estimatedMax;
+    }
+
+    public Double getVolume() {
+        return volume;
+    }
+
+    public void setVolume(Double volume) {
+        this.volume = volume;
     }
 
     public Integer getRpe() {
@@ -94,11 +126,11 @@ public class Plan {
         this.day = day;
     }
 
-    public Integer getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 

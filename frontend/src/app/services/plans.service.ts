@@ -24,6 +24,10 @@ export class PlansService {
       , day: day.toString(), weight: weight.toString(), sets: sets.toString(), reps: reps.toString(), rpe: rpe.toString()} )
       .toPromise().then((data: Exercise) => { console.log(data); });
   }
+  public getPlanVolumeToIntensity(): Observable<VolumeToIntensityChartData>{
+    return this.httpClient.get<VolumeToIntensityChartData>(environment.apiUrl+'/api/plans/user/volume_to_intensity?id=2&start=2020-09-24&end=2020-09-28')
+  }
+
 
 }
 
@@ -36,4 +40,10 @@ export interface Plan {
   sets: number;
   reps: number;
   rpe: number;
+}
+export interface VolumeToIntensityChartData {
+  day: string[];
+  exercise: string;
+  volume: number[];
+  intensity: number[];
 }

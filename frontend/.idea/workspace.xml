@@ -26,6 +26,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/src/app/user/components/plans/plans.component.ts" root0="SKIP_HIGHLIGHTING" />
+  </component>
   <component name="ProjectId" id="1gzhDniWgWfiiFYNNryB7QQbwWP" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -41,7 +44,7 @@
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SpringBootJwtAuthentication" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -49,8 +52,9 @@
     <property name="node.js.selected.package.eslint" value="(autodetect)" />
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs.protractor.protractor_package" value="$PROJECT_DIR$/node_modules/protractor" />
+    <property name="nodejs_interpreter_path" value="node" />
     <property name="nodejs_package_manager_path" value="npm" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="settings.nodejs" />
     <property name="ts.external.directory.path" value="D:\work\Inżynierka\project22-master\frontend\node_modules\typescript\lib" />
   </component>
   <component name="RecentsManager">
@@ -81,11 +85,12 @@
       <scripts>
         <script value="start" />
       </scripts>
-      <node-interpreter value="project" />
+      <node-interpreter value="$APPLICATION_CONFIG_DIR$/node/node-v12.13.1-win-x64/node" />
       <envs />
       <method v="2" />
     </configuration>
   </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -119,11 +124,15 @@
       <workItem from="1602232397922" duration="5969000" />
       <workItem from="1602340412141" duration="1458000" />
       <workItem from="1602522535013" duration="24000" />
+      <workItem from="1603715974361" duration="767000" />
+      <workItem from="1603717482230" duration="14783000" />
+      <workItem from="1603821862496" duration="1160000" />
+      <workItem from="1603846296107" duration="1584000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="2" />
+    <option name="version" value="3" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -145,10 +154,14 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="395" y="111" key="#Inspections/0.0.1536.864@0.0.1536.864" timestamp="1600267471902" />
-    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1599419651150">
+    <state x="638" y="343" key="#TSLint" timestamp="1603721567361">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="223" y="87" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1599419651150" />
+    <state x="638" y="343" key="#TSLint/0.0.1536.864@0.0.1536.864" timestamp="1603721567361" />
+    <state x="330" y="58" width="1089" height="737" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603720374944">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="330" y="58" width="1089" height="737" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1536.864@0.0.1536.864" timestamp="1603720374944" />
     <state x="488" y="234" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1599351210706">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -157,26 +170,26 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="574" y="148" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1599355270863" />
-    <state x="549" y="187" key="FileChooserDialogImpl" timestamp="1602522554015">
+    <state x="627" y="193" key="FileChooserDialogImpl" timestamp="1603719501593">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="549" y="187" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1602522554015" />
-    <state width="1493" height="264" key="GridCell.Tab.0.bottom" timestamp="1602269832670">
+    <state x="627" y="193" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1603719501593" />
+    <state width="1493" height="150" key="GridCell.Tab.0.bottom" timestamp="1603830351700">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="264" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1602269832670" />
-    <state width="1493" height="264" key="GridCell.Tab.0.center" timestamp="1602269832670">
+    <state width="1493" height="150" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1603830351700" />
+    <state width="1493" height="150" key="GridCell.Tab.0.center" timestamp="1603830351699">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="264" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1602269832670" />
-    <state width="1493" height="264" key="GridCell.Tab.0.left" timestamp="1602269832669">
+    <state width="1493" height="150" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1603830351699" />
+    <state width="1493" height="150" key="GridCell.Tab.0.left" timestamp="1603830351699">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="264" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1602269832669" />
-    <state width="1493" height="264" key="GridCell.Tab.0.right" timestamp="1602269832670">
+    <state width="1493" height="150" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1603830351699" />
+    <state width="1493" height="150" key="GridCell.Tab.0.right" timestamp="1603830351699">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="264" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1602269832670" />
+    <state width="1493" height="150" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1603830351699" />
     <state width="1493" height="277" key="GridCell.Tab.1.bottom" timestamp="1600037810952">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -225,17 +238,29 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state width="1493" height="277" key="GridCell.Tab.3.right/0.0.1536.864@0.0.1536.864" timestamp="1599423458646" />
-    <state x="277" y="77" key="SettingsEditor" timestamp="1599352969141">
+    <state x="310" y="78" key="SettingsEditor" timestamp="1603719236238">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="277" y="77" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1599352969141" />
+    <state x="310" y="78" key="SettingsEditor/0.0.1536.864@0.0.1536.864" timestamp="1603719236238" />
     <state x="490" y="173" width="540" height="524" key="StructurePopup" timestamp="1599349194340">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="490" y="173" width="540" height="524" key="StructurePopup/0.0.1536.864@0.0.1536.864" timestamp="1599349194340" />
+    <state x="485" y="240" key="jetbrains.nodejs.interpreters-dialog" timestamp="1603718917153">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="485" y="240" key="jetbrains.nodejs.interpreters-dialog/0.0.1536.864@0.0.1536.864" timestamp="1603718917153" />
+    <state x="209" y="53" key="new project wizard" timestamp="1603719514665">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="209" y="53" key="new project wizard/0.0.1536.864@0.0.1536.864" timestamp="1603719514665" />
     <state x="425" y="197" key="run.anything.popup" timestamp="1600026446942">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="425" y="197" key="run.anything.popup/0.0.1536.864@0.0.1536.864" timestamp="1600026446942" />
+    <state x="478" y="140" width="672" height="678" key="search.everywhere.popup" timestamp="1603720366818">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="478" y="140" width="672" height="678" key="search.everywhere.popup/0.0.1536.864@0.0.1536.864" timestamp="1603720366818" />
   </component>
 </project>

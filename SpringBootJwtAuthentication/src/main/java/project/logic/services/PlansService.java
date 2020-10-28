@@ -4,8 +4,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import project.auth.model.User;
 import project.auth.repository.UserRepository;
-import project.logic.dto.ExerciseDto;
+import project.logic.analizators.PlanAnalizator;
+import project.logic.dto.analisator.LiftVolumeDto;
 import project.logic.dto.PlanDto;
+import project.logic.dto.analisator.LiftVolumeToIntensity;
 import project.logic.exceptions.NotFoundException;
 import project.logic.interfaces.services.IPlansService;
 import project.logic.models.Exercise;
@@ -13,10 +15,8 @@ import project.logic.models.Plan;
 import project.logic.repositries.IExercisesRepository;
 import project.logic.repositries.IPlansRepository;
 
-import javax.xml.crypto.Data;
 import java.sql.Date;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -31,6 +31,9 @@ public class PlansService implements IPlansService {
     @Autowired
     private IExercisesRepository exercisesRepository;
 
+    @Autowired
+    private PlanAnalizator planAnalizator;
+
     @Override
     public List<PlanDto> getAllPlans() {
         return plansRepository.findAll().stream().map(PlanDto::new)
@@ -41,7 +44,7 @@ public class PlansService implements IPlansService {
     public List<PlanDto> getAllUserPlans(Long id) {
         User user = userRepository.findById(id)
                 .orElseThrow(()-> new NotFoundException("User not found"));
-        return plansRepository.getPlanByUser(user).stream().map(PlanDto::new)
+        return plansRepository.getPlanByUserOrderByDayAsc(user).stream().map(PlanDto::new)
                 .collect(Collectors.toList());
     }
 
@@ -86,5 +89,42 @@ public class PlansService implements IPlansService {
                     .collect(Collectors.toList());
         }
         throw new NotFoundException("exercise not found");
+    }
+    @Override
+    public List<LiftVolumeDto> getVolumeFormRangeByUserAndExercise(Long user_id, Long exercise_id, java.sql.Date start, java.sql.Date end)
+    {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not found"));
+        Exercise exercise = exercisesRepository.findById(exercise_id).orElseThrow(()-> new NotFoundException("Exercise not found"));
+        if(exercise.getUser().equals(user)) {
+            List<Plan> planList = plansRepository
+                    .getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc
+                            (start, end, user, exercise);
+            return planAnalizator.calculateLiftsVolume(planList);
+        }
+        throw new NotFoundException("exercise not found");
+
+    }
+
+    @Override
+    public List<LiftVolumeDto> getAllUserPlansVolume(Long id) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new NotFoundException("User not found"));
+        return planAnalizator.calculateLiftsVolume(plansRepository.getPlanByUserOrderByDayAsc(user));
+    }
+    @Override
+    public LiftVolumeToIntensity getVolumeToIntensityFormRangeByUserAndExercise(Long user_id, Long exercise_id, Date start, Date end)
+    {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not found"));
+        Exercise exercise = exercisesRepository.findById(exercise_id).orElseThrow(()-> new NotFoundException("Exercise not found"));
+        if(exercise.getUser().equals(user)) {
+            List<Plan> planList = plansRepository
+                    .getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc
+                            (start, end, user, exercise);
+            return planAnalizator.calculateLiftsVolumeToIntensity(planList);
+        }
+        throw new NotFoundException("exercise not found");
+
     }
 }

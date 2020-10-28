@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Plan, PlansService} from '../../../services/plans.service';
+import {Plan, PlansService, VolumeToIntensityChartData} from '../../../services/plans.service';
 import {DatePipe} from '@angular/common';
 import {Exercise, ExercisesService} from '../../../services/exercises.service';
+import {stringify} from "querystring";
+import {Observable} from "rxjs";
 
 
 
@@ -13,8 +15,8 @@ import {Exercise, ExercisesService} from '../../../services/exercises.service';
 })
 export class PlansComponent implements OnInit {
 
+  volumeToIntensityChartData: VolumeToIntensityChartData;
   data: any;
-
   plan: Plan[];
   displayedColumns: string[] = ['Exercise', 'Sets', 'Reps', 'Weight', 'RPE'];
   liftTypes: string[] = ['MAIN_LIFT', 'SUPPORT_LIFT', 'ACCESSORY'];
@@ -31,18 +33,26 @@ export class PlansComponent implements OnInit {
       this.plan = value;
     });
   }
+  initChartsData():void
+  {
+    this.plansService.getPlanVolumeToIntensity().subscribe(value => {
+      this.volumeToIntensityChartData = value;
+      console.log(value);
+      this.initChart();
+    });
+  }
 
   initExercises(): void
   {
     this.exercisesService.getExercisesByType(this.liftType).subscribe(value => {this.exercises = value; });
   }
 
+
   ngOnInit(): void {
     this.initPlan();
-    this.initChart();
-
-
+    this.initChartsData();
   }
+
 
   nextDay(): void {
     this.myDate.setDate(this.myDate.getDate() + 1);
@@ -58,7 +68,7 @@ export class PlansComponent implements OnInit {
 
   savePlan(exercise: string, day: Date, weight: number, sets: number, reps: number, rpe: number): void {
     this.plansService.addPlan(exercise, this.datePipe.transform(this.myDate, 'yyyy-MM-dd'), weight, sets, reps, rpe);
-    this.initPlan();
+    //this.initPlan();
     // DEBILIADA
     this.nextDay();
     this.previousDay();
@@ -66,17 +76,18 @@ export class PlansComponent implements OnInit {
 
   initChart(): void{
     this.data = {
-      labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+
+      labels: this.volumeToIntensityChartData.day,
       datasets: [
         {
-          label: 'First Dataset',
-          data: [65, 59, 80, 81, 56, 55, 40],
+          label: 'volume',
+          data: this.volumeToIntensityChartData.volume,
           fill: false,
           borderColor: '#4bc0c0'
         },
         {
-          label: 'Second Dataset',
-          data: [28, 48, 40, 19, 86, 27, 90],
+          label: 'intensity',
+          data: this.volumeToIntensityChartData.intensity,
           fill: false,
           borderColor: '#565656'
         }

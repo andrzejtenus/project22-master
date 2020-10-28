@@ -6,17 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.auth.security.jwt.JwtProvider;
-import project.logic.dto.ExerciseDto;
 import project.logic.dto.PlanDto;
-import project.logic.dto.TrainingDto;
-import project.logic.exceptions.ConflictException;
 import project.logic.interfaces.services.IPlansService;
-
-import project.logic.repositries.IPlansRepository;
-
 import javax.validation.Valid;
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @RestController
 @RequestMapping("/api/plans")
@@ -40,7 +33,7 @@ public class PlansController {
     public ResponseEntity getUserPlans(@RequestHeader (name="Authorization") String token)
             throws JsonProcessingException {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
-        return ResponseEntity.ok(objectMapper.writeValueAsString(plansService.getAllUserPlans(userId)));
+        return ResponseEntity.ok(plansService.getAllUserPlans(userId));
     }
 
 
@@ -57,15 +50,38 @@ public class PlansController {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(objectMapper.writeValueAsString(plansService.getAllUserPlansByDay(userId, day)));
     }
-    @RequestMapping("/test/{id}")
+    @RequestMapping("/test")
     @GetMapping
     public ResponseEntity gettest(@RequestHeader (name="Authorization") String token,
-            @PathVariable(value = "id") Long id,@RequestParam String start, @RequestParam String end)
+            @RequestParam Long id,@RequestParam Date start, @RequestParam Date end)
     {
-        //Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
-        //return ResponseEntity.ok(plansService.
-         //       gatPlansFormRangeByUserAndExercise(userId, id, Date.valueOf("2020-10-01"), Date.valueOf("2020-10-05")));
-        return ResponseEntity.ok(start+end);
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(plansService.
+                gatPlansFormRangeByUserAndExercise(userId, id, start, end));
     }
-
+    @RequestMapping("/test2")
+    @GetMapping
+    public ResponseEntity gettest2(@RequestHeader (name="Authorization") String token,
+                                  @RequestParam Long id,@RequestParam Date start, @RequestParam Date end)
+    {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(plansService.
+                getVolumeFormRangeByUserAndExercise(userId, id, start, end));
+    }
+    @RequestMapping("/user/volume")
+    @GetMapping
+    public ResponseEntity getUserPlansVolume(@RequestHeader (name="Authorization") String token)
+            throws JsonProcessingException {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(plansService.getAllUserPlansVolume(userId));
+    }
+    @RequestMapping("/user/volume_to_intensity")
+    @GetMapping
+    public ResponseEntity getUserPlansVolumeToIntensity(@RequestHeader (name="Authorization") String token
+            ,@RequestParam Long id,@RequestParam Date start, @RequestParam Date end)
+            throws JsonProcessingException {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(plansService.
+                getVolumeToIntensityFormRangeByUserAndExercise(userId, id, start, end));
+    }
 }

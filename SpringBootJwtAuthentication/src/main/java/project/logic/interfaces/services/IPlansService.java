@@ -1,9 +1,10 @@
 package project.logic.interfaces.services;
 
-import project.logic.dto.ExerciseDto;
+import project.logic.dto.analisator.LiftVolumeDto;
 import project.logic.dto.PlanDto;
-import project.logic.models.Exercise;
+import project.logic.dto.analisator.LiftVolumeToIntensity;
 
+import java.sql.Date;
 import java.util.List;
 
 public interface IPlansService {
@@ -17,4 +18,10 @@ public interface IPlansService {
 
     List<PlanDto> gatPlansFormRangeByUserAndExercise(Long user_id, Long exercise_id
             , java.sql.Date start, java.sql.Date end);
+
+    List<LiftVolumeDto> getVolumeFormRangeByUserAndExercise(Long user_id, Long exercise_id, java.sql.Date start, java.sql.Date end);
+
+    List<LiftVolumeDto> getAllUserPlansVolume(Long id);
+
+    LiftVolumeToIntensity getVolumeToIntensityFormRangeByUserAndExercise(Long user_id, Long exercise_id, Date start, Date end);
 }

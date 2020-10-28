@@ -3,6 +3,7 @@ package project.logic.dto;
 import project.logic.models.Plan;
 import project.logic.models.Training;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
@@ -21,7 +22,7 @@ public class PlanDto {
     private java.sql.Date day;
 
     @NotNull(message = "Weight can not be empty")
-    private java.lang.Integer weight;
+    private java.lang.Double weight;
 
     @NotNull(message = "Sets can not be empty")
     private java.lang.Integer sets;
@@ -88,11 +89,11 @@ public class PlanDto {
         this.day = day;
     }
 
-    public Integer getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
-    public void setWeight(Integer weight) {
+    public void setWeight(Double weight) {
         this.weight = weight;
     }
 
