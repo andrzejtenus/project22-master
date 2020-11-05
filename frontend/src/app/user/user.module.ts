@@ -14,9 +14,10 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule} from '@angular/forms';
 import { PlansComponent } from './components/plans/plans.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatNativeDateModule} from '@angular/material/core';
+import {MAT_DATE_LOCALE, MatNativeDateModule} from '@angular/material/core';
 import {MatSelectModule} from '@angular/material/select';
 import {ChartModule} from 'primeng/chart';
+import {ChartsModule} from "ng2-charts";
 
 
 
@@ -38,7 +39,8 @@ import {ChartModule} from 'primeng/chart';
     MatDatepickerModule,
     MatNativeDateModule,
     MatSelectModule,
-    ChartModule
+    ChartModule,
+    ChartsModule
   ],
   providers: [
     {

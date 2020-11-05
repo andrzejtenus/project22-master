@@ -84,4 +84,13 @@ public class PlansController {
         return ResponseEntity.ok(plansService.
                 getVolumeToIntensityFormRangeByUserAndExercise(userId, id, start, end));
     }
+    @RequestMapping("/user/lifts_volumes")
+    @GetMapping
+    public ResponseEntity getUserPlansVolumes(@RequestHeader (name="Authorization") String token
+            ,@RequestParam Date start, @RequestParam Date end)
+            throws JsonProcessingException {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(plansService.
+                getVolumesFormRangeByUser(userId, start, end));
+    }
 }

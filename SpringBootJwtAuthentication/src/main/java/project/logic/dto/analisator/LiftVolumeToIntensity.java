@@ -13,18 +13,55 @@ public class LiftVolumeToIntensity {
 
     private List<java.lang.Double> intensity;
 
+    private List<java.lang.Double> weight;
+
+    private double maxVolume;
+
+    private double maxWeight;
+
     public LiftVolumeToIntensity() {
         day = new ArrayList<Date>();
         volume = new ArrayList<Double>();
         intensity= new ArrayList<Double>();
+        weight= new ArrayList<Double>();
     }
 
-    public LiftVolumeToIntensity(List<Date> day, String exercise, List<Double> volume, List<Double> intensity) {
+    public LiftVolumeToIntensity(List<Date> day, String exercise, List<Double> volume
+            , List<Double> intensity,  List<Double> weight, double maxWeight, double maxVolume) {
         this.day = day;
         this.exercise = exercise;
         this.volume = volume;
         this.intensity = intensity;
+        this.weight = weight;
+        this.maxVolume=maxVolume;
+        this.maxWeight=maxWeight;
     }
+
+    public List<Double> getWeight() {
+        return weight;
+    }
+
+    public void setWeight(List<Double> weight) {
+        this.weight = weight;
+    }
+
+
+    public double getMaxVolume() {
+        return maxVolume;
+    }
+
+    public void setMaxVolume(double maxVolume) {
+        this.maxVolume = maxVolume;
+    }
+
+    public double getMaxWeight() {
+        return maxWeight;
+    }
+
+    public void setMaxWeight(double maxWeight) {
+        this.maxWeight = maxWeight;
+    }
+
     public List<Date> getDay() {
         return day;
     }

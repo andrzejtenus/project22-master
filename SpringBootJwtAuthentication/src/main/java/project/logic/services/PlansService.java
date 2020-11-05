@@ -8,6 +8,7 @@ import project.logic.analizators.PlanAnalizator;
 import project.logic.dto.analisator.LiftVolumeDto;
 import project.logic.dto.PlanDto;
 import project.logic.dto.analisator.LiftVolumeToIntensity;
+import project.logic.dto.analisator.VolumeForTypes;
 import project.logic.exceptions.NotFoundException;
 import project.logic.interfaces.services.IPlansService;
 import project.logic.models.Exercise;
@@ -125,6 +126,17 @@ public class PlansService implements IPlansService {
             return planAnalizator.calculateLiftsVolumeToIntensity(planList);
         }
         throw new NotFoundException("exercise not found");
-
     }
+    @Override
+    public VolumeForTypes getVolumesFormRangeByUser(Long user_id, Date start, Date end)
+    {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not found"));
+
+            List<Plan> planList = plansRepository
+                    .getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserOrderByDayAsc
+                            (start, end, user);
+            return planAnalizator.calculateLiftsVolumeForTypes(planList);
+    }
+
 }

@@ -6,7 +6,6 @@ import project.logic.dto.PlanDto;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.sql.Timestamp;
 
 @Entity
 @Table(name="Plans")
@@ -63,7 +62,13 @@ public class Plan {
 
     private void calculateEstimatedMax()
     {
-        this.estimatedMax=(this.weight * (this.reps+(10-this.rpe)))/30 + weight;
+        if (this.rpe.equals(10) && this.reps.equals(1)){
+            this.estimatedMax=this.weight;
+        }
+        else {
+            this.estimatedMax=(this.weight * (this.reps+(10-this.rpe)))/30 + weight;
+        }
+
     }
     private void calculateVolume()
     {

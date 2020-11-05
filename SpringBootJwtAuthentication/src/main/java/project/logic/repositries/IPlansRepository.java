@@ -15,5 +15,7 @@ public interface IPlansRepository extends JpaRepository<Plan, Long> {
     List<Plan> getPlanByDayGreaterThanEqualAndDayLessThanEqual(java.sql.Date start, java.sql.Date end);
     List<Plan> getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc
             (java.sql.Date start, java.sql.Date end, User user, Exercise exercise);
+    List<Plan> getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserOrderByDayAsc
+            (java.sql.Date start, java.sql.Date end, User user);
 }
 
