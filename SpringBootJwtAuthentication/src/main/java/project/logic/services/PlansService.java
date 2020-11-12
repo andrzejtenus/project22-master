@@ -8,7 +8,9 @@ import project.logic.analizators.PlanAnalizator;
 import project.logic.dto.analisator.LiftVolumeDto;
 import project.logic.dto.PlanDto;
 import project.logic.dto.analisator.LiftVolumeToIntensity;
+import project.logic.dto.analisator.VolumeForTrainingMethods;
 import project.logic.dto.analisator.VolumeForTypes;
+import project.logic.exceptions.ConflictException;
 import project.logic.exceptions.NotFoundException;
 import project.logic.interfaces.services.IPlansService;
 import project.logic.models.Exercise;
@@ -118,7 +120,8 @@ public class PlansService implements IPlansService {
     {
         User user = userRepository.findById(user_id)
                 .orElseThrow(()-> new NotFoundException("User not found"));
-        Exercise exercise = exercisesRepository.findById(exercise_id).orElseThrow(()-> new NotFoundException("Exercise not found"));
+        Exercise exercise = exercisesRepository.findById(exercise_id)
+                .orElseThrow(()-> new NotFoundException("Exercise not found"));
         if(exercise.getUser().equals(user)) {
             List<Plan> planList = plansRepository
                     .getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc
@@ -138,5 +141,29 @@ public class PlansService implements IPlansService {
                             (start, end, user);
             return planAnalizator.calculateLiftsVolumeForTypes(planList);
     }
-
+    @Override
+    public void deletePlan(Long id, Long user_id) throws ConflictException {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not fund"));
+        Plan plan = plansRepository.findById(id).orElseThrow(()-> new NotFoundException("Exercise not fund"));
+        if (plan.getUser().equals(user))
+            plansRepository.delete(plan);
+        else
+            throw new ConflictException("No Permission for that exercise");
+    }
+    @Override
+    public VolumeForTrainingMethods getVolumesForStrengthTypesFormRangeByUser(Long user_id, Date start, Date end, Long exercise_id)
+    {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not found"));
+        Exercise exercise = exercisesRepository.findById(exercise_id)
+                .orElseThrow(()-> new NotFoundException("Exercise not found"));
+        if(exercise.getUser().equals(user)) {
+            List<Plan> planList = plansRepository
+                    .getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc
+                            (start, end, user, exercise);
+            return planAnalizator.calculateVolumeForTrainingMethods(planList);
+        }
+        throw new NotFoundException("exercise not found");
+    }
 }

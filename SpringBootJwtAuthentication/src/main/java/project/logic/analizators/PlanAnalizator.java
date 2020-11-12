@@ -3,6 +3,7 @@ package project.logic.analizators;
 import org.springframework.stereotype.Component;
 import project.logic.dto.analisator.LiftVolumeDto;
 import project.logic.dto.analisator.LiftVolumeToIntensity;
+import project.logic.dto.analisator.VolumeForTrainingMethods;
 import project.logic.dto.analisator.VolumeForTypes;
 import project.logic.models.Plan;
 
@@ -60,6 +61,9 @@ public class PlanAnalizator {
             return chartData;
 
         for (Plan p: liftsList) {
+            if(p.getRpe()>-1)
+            {
+
             if(p.getWeight()>maxWeight)
                 maxWeight=p.getWeight();
 
@@ -94,10 +98,14 @@ public class PlanAnalizator {
                 chartData.getWeight().add(p.getWeight());
                 maxCurrEstimatedWeight=p.getEstimatedMax();
             }
+            }
         }
         double tmp= chartData.getIntensity().get(chartData.getIntensity().size()-1);
         chartData.getIntensity().remove(chartData.getIntensity().size()-1);
         chartData.getIntensity().add(tmp/maxCurrEstimatedWeight);
+
+        if(maxVolume<chartData.getVolume().get(chartData.getVolume().size()-1))
+            maxVolume=chartData.getVolume().get(chartData.getVolume().size()-1);
         //////////////////////////////////////////////////////////////////////////////////////////////
         List<Double> newChartVolume = new ArrayList<>();
         for(int i= 0;i< chartData.getVolume().size();i++ ){
@@ -117,6 +125,8 @@ public class PlanAnalizator {
     {
         VolumeForTypes volumeForTypes = new VolumeForTypes();
         for (Plan plan:LiftsList){
+            if (plan.getRpe()>-1)
+            {
             switch(plan.getExercise().getType()) {
                 case MAIN_LIFT:
                     volumeForTypes.addToMainLiftsVolume(plan.getVolume());
@@ -128,8 +138,36 @@ public class PlanAnalizator {
                     volumeForTypes.addToAccessoryLiftsVolume(plan.getVolume());
                     break;
             }
+            }
         }
         volumeForTypes.calculateLiftsVolumeInPercent();
         return volumeForTypes;
+    }
+    public VolumeForTrainingMethods calculateVolumeForTrainingMethods(List<Plan> LiftsList){
+        VolumeForTrainingMethods volume = new VolumeForTrainingMethods();
+        double intensityTMP=0;
+        double volumeTMP=0;
+        for (Plan lift: LiftsList){
+            if (lift.getRpe()>-1) {
+                volumeTMP = lift.getVolume();
+                intensityTMP = lift.getRpe() > 0 ? lift.getWeight() / lift.getEstimatedMax() : 0.6;
+                volume.addToTotal(volumeTMP);
+                int reps = lift.getReps();
+
+                if (intensityTMP >= 0.9)
+                    volume.addToMaximalStrength(volumeTMP);
+                else if (intensityTMP >= 0.75 && intensityTMP <= 0.85)
+                    volume.addToOptimalRange(volumeTMP);
+                else if (intensityTMP >= 0.55 && intensityTMP <= 0.65)
+                    volume.addToDynamic(volumeTMP);
+
+                if (intensityTMP < 0.9 && lift.getRpe() == 10)
+                    volume.addToRepetition(volumeTMP);
+                else
+                    volume.addToSubmaximal(volumeTMP);
+            }
+
+        }
+        return volume;
     }
 }

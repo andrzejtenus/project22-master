@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {Plan, PlansService, VolumesByType, VolumeToIntensityChartData} from '../../../services/plans.service';
 import {DatePipe} from '@angular/common';
 import {Exercise, ExercisesService} from '../../../services/exercises.service';
-import {stringify} from "querystring";
+import {stringify} from 'querystring';
 import {Observable} from "rxjs";
 import * as moment from 'moment';
 import { ChartType, ChartOptions } from 'chart.js';

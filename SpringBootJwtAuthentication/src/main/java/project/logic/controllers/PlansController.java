@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import project.auth.security.jwt.JwtProvider;
 import project.logic.dto.PlanDto;
+import project.logic.exceptions.ConflictException;
 import project.logic.interfaces.services.IPlansService;
 import javax.validation.Valid;
 import java.sql.Date;
@@ -92,5 +93,22 @@ public class PlansController {
         Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
         return ResponseEntity.ok(plansService.
                 getVolumesFormRangeByUser(userId, start, end));
+    }
+
+    @DeleteMapping
+    public ResponseEntity deletePlan(@RequestHeader (name="Authorization") String token,
+                                         @RequestParam Long plan_id) throws ConflictException {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        plansService.deletePlan(plan_id, userId);
+        return ResponseEntity.ok("plan has been deleted");
+    }
+    @RequestMapping("/user/strength_types")
+    @GetMapping
+    public ResponseEntity getStrength(@RequestHeader (name="Authorization") String token
+            ,@RequestParam Long id,@RequestParam Date start, @RequestParam Date end)
+            throws JsonProcessingException {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(plansService.
+                getVolumesForStrengthTypesFormRangeByUser(userId, start, end, id));
     }
 }

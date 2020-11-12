@@ -3,7 +3,9 @@ package project.logic.interfaces.services;
 import project.logic.dto.analisator.LiftVolumeDto;
 import project.logic.dto.PlanDto;
 import project.logic.dto.analisator.LiftVolumeToIntensity;
+import project.logic.dto.analisator.VolumeForTrainingMethods;
 import project.logic.dto.analisator.VolumeForTypes;
+import project.logic.exceptions.ConflictException;
 
 import java.sql.Date;
 import java.util.List;
@@ -27,4 +29,10 @@ public interface IPlansService {
     LiftVolumeToIntensity getVolumeToIntensityFormRangeByUserAndExercise(Long user_id, Long exercise_id, Date start, Date end);
 
     VolumeForTypes getVolumesFormRangeByUser(Long user_id, Date start, Date end);
+
+    void deletePlan(Long id, Long user_id) throws ConflictException;
+
+    VolumeForTrainingMethods getVolumesForStrengthTypesFormRangeByUser(Long user_id, Date start, Date end, Long exercise_id);
+
+
 }

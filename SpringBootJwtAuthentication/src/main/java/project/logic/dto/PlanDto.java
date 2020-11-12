@@ -31,7 +31,7 @@ public class PlanDto {
     private java.lang.Integer reps;
 
     @NotNull(message = "RPE can not be empty")
-    @Min(0)
+    @Min(-1)
     @Max(10)
     private java.lang.Integer rpe;
 

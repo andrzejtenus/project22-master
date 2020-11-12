@@ -67,7 +67,7 @@ public class ExerciseService implements IExerciseService {
     public void deleteExercise(Long id, Long user_id){
         User user = userRepository.findById(user_id)
                 .orElseThrow(()-> new NotFoundException("User not fund"));
-        Exercise exercise = exercisesRepository.findByUserAndId(user, user_id)
+        Exercise exercise = exercisesRepository.findByUserAndId(user, id)
                 .orElseThrow(()-> new NotFoundException("Exercise not fund"));
         exercisesRepository.delete(exercise);
     }
