@@ -111,4 +111,13 @@ public class PlansController {
         return ResponseEntity.ok(plansService.
                 getVolumesForStrengthTypesFormRangeByUser(userId, start, end, id));
     }
+    @RequestMapping("/user/prilepins_table_view")
+    @GetMapping
+    public ResponseEntity getPrilepinsTable(@RequestHeader (name="Authorization") String token
+            ,@RequestParam Long id,@RequestParam Date start, @RequestParam Date end)
+            throws JsonProcessingException {
+        Long userId = jwtProvider.getUserIdFromToken(token.replace("Bearer ",""));
+        return ResponseEntity.ok(plansService
+                .getPrilepinsTableFormRangeByUser(userId, start, end, id));
+    }
 }

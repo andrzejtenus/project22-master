@@ -49,6 +49,7 @@ public class PlanDto {
     public PlanDto() {
     }
 
+
     public Integer getRpe() {
         return rpe;
     }

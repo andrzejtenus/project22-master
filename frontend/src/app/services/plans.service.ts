@@ -39,8 +39,25 @@ export class PlansService {
     return this.httpClient.get<VolumesByType>(environment.apiUrl+
       '/api/plans/user/lifts_volumes',{params})
   }
+  public getExerciseStrengthTypes(start: string, end: string, id: Number): Observable<StrengthTypes>{
+    const params = new HttpParams()
+      .set('id', id.toString())
+      .set('start', start)
+      .set('end', end);
+    return this.httpClient.get<StrengthTypes>(environment.apiUrl+
+      '/api/plans/user/strength_types',{params})
+  }
 
 
+}
+export interface StrengthTypes {
+  volumeForMaximalStrength: number;
+  volumeForRest: number;
+  volumeForOptimalRange: number;
+  volumeForDynamic: number;
+  volumeForRepetitionsMethod: number;
+  volumeForSubmaximalMethod: number;
+  totalVolume: number;
 }
 
 export interface Plan {

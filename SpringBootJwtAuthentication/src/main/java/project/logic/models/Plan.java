@@ -70,6 +70,11 @@ public class Plan {
         }
 
     }
+
+    public double getIntensity(){
+        return this.getWeight()/this.getEstimatedMax();
+    }
+
     private void calculateVolume()
     {
         this.volume= this.weight * this.sets * this.reps;

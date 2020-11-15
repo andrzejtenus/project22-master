@@ -1,10 +1,7 @@
 package project.logic.analizators;
 
 import org.springframework.stereotype.Component;
-import project.logic.dto.analisator.LiftVolumeDto;
-import project.logic.dto.analisator.LiftVolumeToIntensity;
-import project.logic.dto.analisator.VolumeForTrainingMethods;
-import project.logic.dto.analisator.VolumeForTypes;
+import project.logic.dto.analisator.*;
 import project.logic.models.Plan;
 
 
@@ -100,25 +97,27 @@ public class PlanAnalizator {
             }
             }
         }
-        double tmp= chartData.getIntensity().get(chartData.getIntensity().size()-1);
-        chartData.getIntensity().remove(chartData.getIntensity().size()-1);
-        chartData.getIntensity().add(tmp/maxCurrEstimatedWeight);
+        if (chartData.getIntensity().size()>0) {
+            double tmp = chartData.getIntensity().get(chartData.getIntensity().size() - 1);
+            chartData.getIntensity().remove(chartData.getIntensity().size() - 1);
+            chartData.getIntensity().add(tmp / maxCurrEstimatedWeight);
 
-        if(maxVolume<chartData.getVolume().get(chartData.getVolume().size()-1))
-            maxVolume=chartData.getVolume().get(chartData.getVolume().size()-1);
-        //////////////////////////////////////////////////////////////////////////////////////////////
-        List<Double> newChartVolume = new ArrayList<>();
-        for(int i= 0;i< chartData.getVolume().size();i++ ){
-            newChartVolume.add(chartData.getVolume().get(i)/maxVolume);
+            if (maxVolume < chartData.getVolume().get(chartData.getVolume().size() - 1))
+                maxVolume = chartData.getVolume().get(chartData.getVolume().size() - 1);
+            //////////////////////////////////////////////////////////////////////////////////////////////
+            List<Double> newChartVolume = new ArrayList<>();
+            for (int i = 0; i < chartData.getVolume().size(); i++) {
+                newChartVolume.add(chartData.getVolume().get(i) / maxVolume);
+            }
+            chartData.setVolume(newChartVolume);
+            List<Double> newChartWeight = new ArrayList<>();
+            for (int i = 0; i < chartData.getWeight().size(); i++) {
+                newChartWeight.add(chartData.getWeight().get(i) / maxWeight);
+            }
+            chartData.setWeight(newChartWeight);
+            chartData.setMaxWeight(maxWeight);
+            chartData.setMaxVolume(maxVolume);
         }
-        chartData.setVolume(newChartVolume);
-        List<Double> newChartWeight = new ArrayList<>();
-        for(int i= 0;i< chartData.getWeight().size();i++ ){
-            newChartWeight.add(chartData.getWeight().get(i)/maxWeight);
-        }
-        chartData.setWeight(newChartWeight);
-        chartData.setMaxWeight(maxWeight);
-        chartData.setMaxVolume(maxVolume);
         return chartData;
     }
     public VolumeForTypes calculateLiftsVolumeForTypes(List<Plan> LiftsList)
@@ -166,8 +165,43 @@ public class PlanAnalizator {
                 else
                     volume.addToSubmaximal(volumeTMP);
             }
-
         }
         return volume;
+    }
+    public PrilepinsTableView prilepinsTableCalculator(List<Plan> LiftsList){
+        PrilepinsTableView prilepinsTableView = new PrilepinsTableView();
+        for (Plan lift:LiftsList) {
+            if(lift.getRpe()>=0)
+            {
+                if (lift.getRpe() == 0){
+                    prilepinsTableView.addToRepsFor55to65(lift.getReps());
+                    if(lift.getReps()>6)
+                        prilepinsTableView.addWarning("Too many reps for 55-65% range");
+                }
+                else if (lift.getIntensity()>= 0.9) {
+                    prilepinsTableView.addToRepsForOver90(lift.getReps());
+                    if(lift.getReps()>2)
+                        prilepinsTableView.addWarning("Too many reps for 90% range");
+                }
+                else if (lift.getIntensity()< 0.9 && lift.getIntensity()>= 0.8){
+                    prilepinsTableView.addToRepsFor80to90(lift.getReps());
+                    if(lift.getReps()>4)
+                        prilepinsTableView.addWarning("Too many reps for 90-80% range");
+                    if(lift.getReps()<2)
+                        prilepinsTableView.addWarning("Not enough reps for 90-80% range");
+                }
+                else if (lift.getIntensity()< 0.8 && lift.getIntensity()>= 0.7){
+                    prilepinsTableView.addToRepsFor80to90(lift.getReps());
+                    if(lift.getReps()>6)
+                        prilepinsTableView.addWarning("Too many reps for 80-70% range");
+                    if(lift.getReps()<3){
+                        prilepinsTableView.addWarning("Not enough reps for 80-70% range");
+                    }
+                }
+            }
+        }
+        prilepinsTableView.calculateIntensityPercent();
+        prilepinsTableView.calculateRepsPercent();
+        return prilepinsTableView;
     }
 }

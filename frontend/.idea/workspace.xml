@@ -44,7 +44,7 @@
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SpringBootJwtAuthentication" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
     <property name="node.js.path.for.package.eslint" value="project" />
@@ -139,6 +139,9 @@
       <workItem from="1604834671371" duration="923000" />
       <workItem from="1604960886256" duration="1694000" />
       <workItem from="1605135420672" duration="634000" />
+      <workItem from="1605203759080" duration="1270000" />
+      <workItem from="1605396329637" duration="660000" />
+      <workItem from="1605479359948" duration="2611000" />
     </task>
     <servers />
   </component>
@@ -181,26 +184,26 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="574" y="148" key="#com.intellij.ide.util.MemberChooser/0.0.1536.864@0.0.1536.864" timestamp="1599355270863" />
-    <state x="627" y="193" key="FileChooserDialogImpl" timestamp="1605135443080">
+    <state x="627" y="193" key="FileChooserDialogImpl" timestamp="1605203992709">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state x="627" y="193" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1605135443080" />
-    <state width="1493" height="254" key="GridCell.Tab.0.bottom" timestamp="1604971241227">
+    <state x="627" y="193" key="FileChooserDialogImpl/0.0.1536.864@0.0.1536.864" timestamp="1605203992709" />
+    <state width="1493" height="122" key="GridCell.Tab.0.bottom" timestamp="1605402486786">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1604971241227" />
-    <state width="1493" height="254" key="GridCell.Tab.0.center" timestamp="1604971241226">
+    <state width="1493" height="122" key="GridCell.Tab.0.bottom/0.0.1536.864@0.0.1536.864" timestamp="1605402486786" />
+    <state width="1493" height="122" key="GridCell.Tab.0.center" timestamp="1605402486786">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1604971241226" />
-    <state width="1493" height="254" key="GridCell.Tab.0.left" timestamp="1604971241226">
+    <state width="1493" height="122" key="GridCell.Tab.0.center/0.0.1536.864@0.0.1536.864" timestamp="1605402486786" />
+    <state width="1493" height="122" key="GridCell.Tab.0.left" timestamp="1605402486786">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1604971241226" />
-    <state width="1493" height="254" key="GridCell.Tab.0.right" timestamp="1604971241226">
+    <state width="1493" height="122" key="GridCell.Tab.0.left/0.0.1536.864@0.0.1536.864" timestamp="1605402486786" />
+    <state width="1493" height="122" key="GridCell.Tab.0.right" timestamp="1605402486786">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
-    <state width="1493" height="254" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1604971241226" />
+    <state width="1493" height="122" key="GridCell.Tab.0.right/0.0.1536.864@0.0.1536.864" timestamp="1605402486786" />
     <state width="1493" height="277" key="GridCell.Tab.1.bottom" timestamp="1600037810952">
       <screen x="0" y="0" width="1536" height="864" />
     </state>
@@ -257,6 +260,10 @@
       <screen x="0" y="0" width="1536" height="864" />
     </state>
     <state x="490" y="173" width="540" height="524" key="StructurePopup/0.0.1536.864@0.0.1536.864" timestamp="1599349194340" />
+    <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1605482933748">
+      <screen x="0" y="0" width="1536" height="864" />
+    </state>
+    <state x="586" y="346" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/0.0.1536.864@0.0.1536.864" timestamp="1605482933748" />
     <state x="485" y="240" key="jetbrains.nodejs.interpreters-dialog" timestamp="1603718917153">
       <screen x="0" y="0" width="1536" height="864" />
     </state>

@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import {Plan, PlansService, VolumesByType, VolumeToIntensityChartData} from '../../../services/plans.service';
+import {
+  Plan,
+  PlansService,
+  StrengthTypes,
+  VolumesByType,
+  VolumeToIntensityChartData
+} from '../../../services/plans.service';
 import {DatePipe} from '@angular/common';
 import {Exercise, ExercisesService} from '../../../services/exercises.service';
 import {stringify} from 'querystring';
@@ -18,7 +24,7 @@ import { timer } from 'rxjs';
 })
 export class PlansComponent implements OnInit {
 
-
+  exerciseStrengthTypesChartData:StrengthTypes;
   volumeToIntensityChartData: VolumeToIntensityChartData;
   volumePieChartData: VolumesByType = {
     mainLiftsVolume: 0,
@@ -54,7 +60,6 @@ export class PlansComponent implements OnInit {
   {
     this.plansService.getPlanByDay(this.datePipe.transform(this.myDate, 'yyyy-MM-dd')).subscribe(value => {
       this.plan = value;
-      console.log("v3");
     });
   }
   initBasicChartData():void{
@@ -64,6 +69,7 @@ export class PlansComponent implements OnInit {
       this.chartExercise = this.chartExercises[0];
       this.initChartsData(this.startDate,this.endDate);
       this.initVolumePieChartData(this.startDate,this.endDate);
+      this.initStrengthTypesChartData(this.startDate, this.endDate, this.chartExercise.id);
     });
   }
 
@@ -72,7 +78,6 @@ export class PlansComponent implements OnInit {
     this.plansService.getPlanVolumeToIntensity(this.chartExercise.id, start, end).subscribe(value => {
       this.volumeToIntensityChartData = value;
       this.initChart();
-      console.log("v");
     });
   }
 
@@ -90,8 +95,6 @@ export class PlansComponent implements OnInit {
     var newDate= new Date(this.myDate);
     this.startDate=this.datePipe.transform(new Date(newDate.setDate(this.myDate.getDate() - 2100)), 'yyyy-MM-dd');
     this.endDate=this.datePipe.transform(new Date(newDate.setDate(this.myDate.getDate() + 4200)), 'yyyy-MM-dd');
-    console.log(this.startDate);
-    console.log(this.endDate);
     this.initPlan();
     this.initBasicChartData();
   }
@@ -117,8 +120,16 @@ export class PlansComponent implements OnInit {
     setTimeout(()=> {
       this.initChartsData(this.startDate,this.endDate);
       this.initVolumePieChartData(this.startDate,this.endDate);
+      this.initStrengthTypesChartData(this.startDate, this.endDate, this.chartExercise.id);
       this.initPlan();
     }, 100);
+  }
+  initStrengthTypesChartData(startDate: string, endDate:string, id:number): void{
+    this.plansService.getExerciseStrengthTypes(startDate, endDate, id)
+      .subscribe(value => {
+        this.exerciseStrengthTypesChartData=value;
+        console.log(this.exerciseStrengthTypesChartData);
+      });
   }
 
   initChart(): void{
@@ -155,6 +166,7 @@ export class PlansComponent implements OnInit {
     this.endDate=moment(end, 'MM/DD/YYYY').format('YYYY-MM-DD');
     this.initChartsData(this.startDate,this.endDate);
      this.initVolumePieChartData(this.startDate,this.endDate);
+     this.initStrengthTypesChartData(this.startDate, this.endDate, this.chartExercise.id);
   }
 
   //////////////////////////////////////////////////////////////////////////////////////////////////
@@ -163,7 +175,6 @@ export class PlansComponent implements OnInit {
     this.plansService.getPlanVolumes(start, end).subscribe(value => {
       this.volumePieChartData = value;
       this.initPieChartData();
-      console.log("v2");
     });
   }
   canvas: any;

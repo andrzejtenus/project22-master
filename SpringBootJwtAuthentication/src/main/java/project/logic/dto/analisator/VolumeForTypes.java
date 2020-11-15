@@ -1,5 +1,8 @@
 package project.logic.dto.analisator;
 
+import lombok.Getter;
+
+@Getter
 public class VolumeForTypes {
     double mainLiftsVolume;
     double accessoryLiftsVolume;
@@ -48,51 +51,4 @@ public class VolumeForTypes {
         this.supportLiftsVolumeInPercent = supportLiftsVolumeInPercent;
     }
 
-    public double getMainLiftsVolume() {
-        return mainLiftsVolume;
-    }
-
-    public void setMainLiftsVolume(double mainLiftsVolume) {
-        this.mainLiftsVolume = mainLiftsVolume;
-    }
-
-    public double getAccessoryLiftsVolume() {
-        return accessoryLiftsVolume;
-    }
-
-    public void setAccessoryLiftsVolume(double accessoryLiftsVolume) {
-        this.accessoryLiftsVolume = accessoryLiftsVolume;
-    }
-
-    public double getSupportLiftsVolume() {
-        return supportLiftsVolume;
-    }
-
-    public void setSupportLiftsVolume(double supportLiftsVolume) {
-        this.supportLiftsVolume = supportLiftsVolume;
-    }
-
-    public double getMainLiftsVolumeInPercent() {
-        return mainLiftsVolumeInPercent;
-    }
-
-    public void setMainLiftsVolumeInPercent(double mainLiftsVolumeInPercent) {
-        this.mainLiftsVolumeInPercent = mainLiftsVolumeInPercent;
-    }
-
-    public double getAccessoryLiftsVolumeInPercent() {
-        return accessoryLiftsVolumeInPercent;
-    }
-
-    public void setAccessoryLiftsVolumeInPercent(double accessoryLiftsVolumeInPercent) {
-        this.accessoryLiftsVolumeInPercent = accessoryLiftsVolumeInPercent;
-    }
-
-    public double getSupportLiftsVolumeInPercent() {
-        return supportLiftsVolumeInPercent;
-    }
-
-    public void setSupportLiftsVolumeInPercent(double supportLiftsVolumeInPercent) {
-        this.supportLiftsVolumeInPercent = supportLiftsVolumeInPercent;
-    }
 }

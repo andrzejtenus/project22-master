@@ -5,11 +5,8 @@ import org.springframework.stereotype.Service;
 import project.auth.model.User;
 import project.auth.repository.UserRepository;
 import project.logic.analizators.PlanAnalizator;
-import project.logic.dto.analisator.LiftVolumeDto;
+import project.logic.dto.analisator.*;
 import project.logic.dto.PlanDto;
-import project.logic.dto.analisator.LiftVolumeToIntensity;
-import project.logic.dto.analisator.VolumeForTrainingMethods;
-import project.logic.dto.analisator.VolumeForTypes;
 import project.logic.exceptions.ConflictException;
 import project.logic.exceptions.NotFoundException;
 import project.logic.interfaces.services.IPlansService;
@@ -163,6 +160,21 @@ public class PlansService implements IPlansService {
                     .getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc
                             (start, end, user, exercise);
             return planAnalizator.calculateVolumeForTrainingMethods(planList);
+        }
+        throw new NotFoundException("exercise not found");
+    }
+    @Override
+    public PrilepinsTableView getPrilepinsTableFormRangeByUser(Long user_id, Date start, Date end, Long exercise_id)
+    {
+        User user = userRepository.findById(user_id)
+                .orElseThrow(()-> new NotFoundException("User not found"));
+        Exercise exercise = exercisesRepository.findById(exercise_id)
+                .orElseThrow(()-> new NotFoundException("Exercise not found"));
+        if(exercise.getUser().equals(user)) {
+            List<Plan> planList = plansRepository
+                    .getPlanByDayGreaterThanEqualAndDayLessThanEqualAndUserAndExerciseOrderByDayAsc
+                            (start, end, user, exercise);
+            return planAnalizator.prilepinsTableCalculator(planList);
         }
         throw new NotFoundException("exercise not found");
     }

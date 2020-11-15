@@ -1,10 +1,7 @@
 package project.logic.interfaces.services;
 
-import project.logic.dto.analisator.LiftVolumeDto;
+import project.logic.dto.analisator.*;
 import project.logic.dto.PlanDto;
-import project.logic.dto.analisator.LiftVolumeToIntensity;
-import project.logic.dto.analisator.VolumeForTrainingMethods;
-import project.logic.dto.analisator.VolumeForTypes;
 import project.logic.exceptions.ConflictException;
 
 import java.sql.Date;
@@ -35,4 +32,5 @@ public interface IPlansService {
     VolumeForTrainingMethods getVolumesForStrengthTypesFormRangeByUser(Long user_id, Date start, Date end, Long exercise_id);
 
 
+    PrilepinsTableView getPrilepinsTableFormRangeByUser(Long user_id, Date start, Date end, Long exercise_id);
 }
