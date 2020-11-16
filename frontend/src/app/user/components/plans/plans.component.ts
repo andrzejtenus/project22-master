@@ -88,7 +88,8 @@ export class PlansComponent implements OnInit {
   }
 
   initChartExercises(): void {
-    this.exercisesService.getExercisesByType(this.chartLiftType).subscribe(value => {this.chartExercises = value; });
+    this.exercisesService.getExercisesByType(this.chartLiftType).subscribe(value =>
+    {this.chartExercises = value; });
   }
 
   ngOnInit(): void {
@@ -129,6 +130,7 @@ export class PlansComponent implements OnInit {
       .subscribe(value => {
         this.exerciseStrengthTypesChartData=value;
         console.log(this.exerciseStrengthTypesChartData);
+        this.initStrengthTypeChartData();
       });
   }
 
@@ -181,7 +183,7 @@ export class PlansComponent implements OnInit {
   ctx: any;
 
   public initPieChartData() {
-    this.canvas = document.getElementById('myChart');
+    this.canvas = document.getElementById('myLiftTypeChart');
     this.ctx = this.canvas.getContext('2d');
     let myChart = new Chart(this.ctx, {
       type: 'pie',
@@ -204,4 +206,40 @@ export class PlansComponent implements OnInit {
       options: {}
     });
   }
+  public initStrengthTypeChartData() {
+    this.canvas = document.getElementById('myStrengthTypesChart');
+    this.ctx = this.canvas.getContext('2d');
+    let myChart = new Chart(this.ctx, {
+      type: 'pie',
+      data: {
+        labels: ['Maximal Strength ('+Math.round(
+          this.exerciseStrengthTypesChartData.volumeForMaximalStrength
+          /this.exerciseStrengthTypesChartData.totalVolume*100) +'%)'
+          , 'Power ('+Math.round(this.exerciseStrengthTypesChartData.volumeForDynamic
+            /this.exerciseStrengthTypesChartData.totalVolume*100)+ '%)'
+          , 'Repetitions Method ('+Math.round(this.exerciseStrengthTypesChartData.volumeForRepetitionsMethod
+            /this.exerciseStrengthTypesChartData.totalVolume*100)+'%)',
+          'Submaksimal Method ('+Math.round(this.exerciseStrengthTypesChartData.volumeForSubmaximalMethod
+            /this.exerciseStrengthTypesChartData.totalVolume*100)+'%)'],
+
+        datasets: [{
+          label: '# of Votes',
+          data: [this.exerciseStrengthTypesChartData.volumeForMaximalStrength,
+            this.exerciseStrengthTypesChartData.volumeForDynamic,
+            this.exerciseStrengthTypesChartData.volumeForRepetitionsMethod,
+            this.exerciseStrengthTypesChartData.volumeForSubmaximalMethod],
+
+          backgroundColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)',
+            'rgba(255, 206, 86, 1)',
+            'rgba(51, 255, 65, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {}
+    });
+  }
+
 }

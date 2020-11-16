@@ -1,5 +1,8 @@
-div{float: left}
-div{
+div.fullPage{
+  display: flex;
+  justify-content: space-evenly;
+}
+div.halfPage{
   width: 49%;
   margin: 0.5%;
 }
@@ -34,4 +37,8 @@ table {
 }
 .Apply{
   width: 10%;
+}
+.pieChart{
+  width: 32%;
+  margin: 0.5%;
 }

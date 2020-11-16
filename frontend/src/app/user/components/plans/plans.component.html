@@ -1,7 +1,5 @@
-
-
-
-<div>
+<div class="fullPage">
+<div class="halfPage">
   <button class="change_day_button" mat-raised-button color="accent" (click)="previousDay()" >
     <mat-icon>navigate_before</mat-icon>
   </button>
@@ -83,7 +81,7 @@
   </button>
 </div>
 
-<div>
+<div class="halfPage">
 <p-chart type="line" [data]="data"></p-chart>
 
   <mat-form-field appearance="fill" class="selectChartType">
@@ -119,9 +117,17 @@
     Apply
   </button>
 
-  <canvas id="myChart"></canvas>
+</div>
+</div>
+<div class="fullPage">
+
+  <div class="pieChart">
+    <canvas class="pieChart" id="myLiftTypeChart"></canvas>
+  </div>
+  <div class="pieChart">
+    <canvas class="pieChart" id="myStrengthTypesChart"></canvas>
+  </div>
+
 
 
 </div>
-
-

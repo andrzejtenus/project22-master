@@ -155,15 +155,17 @@ public class PlanAnalizator {
 
                 if (intensityTMP >= 0.9)
                     volume.addToMaximalStrength(volumeTMP);
-                else if (intensityTMP >= 0.75 && intensityTMP <= 0.85)
-                    volume.addToOptimalRange(volumeTMP);
                 else if (intensityTMP >= 0.55 && intensityTMP <= 0.65)
                     volume.addToDynamic(volumeTMP);
-
-                if (intensityTMP < 0.9 && lift.getRpe() == 10)
+                else if (intensityTMP < 0.9 && lift.getRpe() == 10)
                     volume.addToRepetition(volumeTMP);
-                else
+                else if(intensityTMP >= 0.7 && lift.getRpe() != 10)
                     volume.addToSubmaximal(volumeTMP);
+
+                if (intensityTMP >= 0.75 && intensityTMP <= 0.85)
+                    volume.addToOptimalRange(volumeTMP);
+
+
             }
         }
         return volume;
