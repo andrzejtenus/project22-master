@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  Plan,
+  Plan, PlanInformation,
   PlansService,
   StrengthTypes,
   VolumesByType,
@@ -24,6 +24,7 @@ import { timer } from 'rxjs';
 })
 export class PlansComponent implements OnInit {
 
+  planInformatrion:PlanInformation;
   exerciseStrengthTypesChartData:StrengthTypes;
   volumeToIntensityChartData: VolumeToIntensityChartData;
   volumePieChartData: VolumesByType = {
@@ -37,6 +38,7 @@ export class PlansComponent implements OnInit {
   piedata: any;
   plan: Plan[];
   displayedColumns: string[] = ['Exercise', 'Sets', 'Reps', 'Weight', 'RPE'];
+  displayedWarnings: string[] = ['Warnings'];
   liftTypes: string[] = ['MAIN_LIFT', 'SUPPORT_LIFT', 'ACCESSORY'];
   chartLiftTypes: string[] = ['MAIN_LIFT', 'SUPPORT_LIFT', 'ACCESSORY'];
   exercises: Exercise[];
@@ -44,7 +46,8 @@ export class PlansComponent implements OnInit {
   myDate = new Date();
   endDate:string;
   startDate:string;
-
+  mainLiftsForDay:Exercise[];
+  mainLiftForDay:Exercise;
 
   chartLiftType: string;
   liftType: string;
@@ -60,6 +63,23 @@ export class PlansComponent implements OnInit {
   {
     this.plansService.getPlanByDay(this.datePipe.transform(this.myDate, 'yyyy-MM-dd')).subscribe(value => {
       this.plan = value;
+      this.initPlanInformations();
+    });
+  }
+  initMainLiftsForDay()
+  {
+    this.exercisesService.getExercisesByType('MAIN_LIFT').subscribe(value => {
+      this.mainLiftsForDay = value;
+      console.log(value);
+      this.mainLiftForDay=this.mainLiftsForDay[0];
+    });
+  }
+  initPlanInformations():void
+  {
+    this.plansService.getPlanInformation(this.datePipe.transform(this.myDate, 'yyyy-MM-dd')
+      ,this.datePipe.transform(this.myDate, 'yyyy-MM-dd'),this.mainLiftForDay.id).subscribe(value => {
+      this.planInformatrion=value;
+      console.log(this.planInformatrion);
     });
   }
   initBasicChartData():void{
@@ -82,6 +102,7 @@ export class PlansComponent implements OnInit {
   }
 
 
+
   initExercises(): void
   {
     this.exercisesService.getExercisesByType(this.liftType).subscribe(value => {this.exercises = value; });
@@ -96,11 +117,11 @@ export class PlansComponent implements OnInit {
     var newDate= new Date(this.myDate);
     this.startDate=this.datePipe.transform(new Date(newDate.setDate(this.myDate.getDate() - 2100)), 'yyyy-MM-dd');
     this.endDate=this.datePipe.transform(new Date(newDate.setDate(this.myDate.getDate() + 4200)), 'yyyy-MM-dd');
+    this.initMainLiftsForDay();
     this.initPlan();
     this.initBasicChartData();
+
   }
-
-
   nextDay(): void {
     this.myDate.setDate(this.myDate.getDate() + 1);
     this.myDate = new Date(this.myDate);
@@ -129,8 +150,8 @@ export class PlansComponent implements OnInit {
     this.plansService.getExerciseStrengthTypes(startDate, endDate, id)
       .subscribe(value => {
         this.exerciseStrengthTypesChartData=value;
-        console.log(this.exerciseStrengthTypesChartData);
         this.initStrengthTypeChartData();
+        this.initOptimalkRangeChartData();
       });
   }
 
@@ -241,5 +262,36 @@ export class PlansComponent implements OnInit {
       options: {}
     });
   }
+  public initOptimalkRangeChartData() {
+    this.canvas = document.getElementById('myOptimalRangeChart');
+    this.ctx = this.canvas.getContext('2d');
+    let myChart = new Chart(this.ctx, {
+      type: 'pie',
+      data: {
+        labels: ['From 75 to 85% ('+Math.round(
+          this.exerciseStrengthTypesChartData.volumeForOptimalRange
+          /this.exerciseStrengthTypesChartData.totalVolume*100) +'%)'
+          , 'Other ('+Math.round((this.exerciseStrengthTypesChartData.totalVolume
+            -this.exerciseStrengthTypesChartData.volumeForOptimalRange)
+            /this.exerciseStrengthTypesChartData.totalVolume*100)+ '%)'],
 
+        datasets: [{
+          label: '# of Votes',
+          data: [this.exerciseStrengthTypesChartData.volumeForOptimalRange,
+            this.exerciseStrengthTypesChartData.totalVolume-this.exerciseStrengthTypesChartData.volumeForOptimalRange],
+
+          backgroundColor: [
+            'rgba(255, 99, 132, 1)',
+            'rgba(54, 162, 235, 1)'
+          ],
+          borderWidth: 1
+        }]
+      },
+      options: {}
+    });
+  }
+
+  initInformatrion() {
+    console.log(this.mainLiftForDay);
+  }
 }

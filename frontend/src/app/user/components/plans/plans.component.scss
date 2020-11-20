@@ -2,8 +2,14 @@ div.fullPage{
   display: flex;
   justify-content: space-evenly;
 }
-div.halfPage{
-  width: 49%;
+
+div.chartPageSize{
+  width: 59%;
+  margin: 0.5%;
+}
+
+div.tablePageSize{
+  width: 39%;
   margin: 0.5%;
 }
 table {
@@ -39,6 +45,14 @@ table {
   width: 10%;
 }
 .pieChart{
-  width: 32%;
-  margin: 0.5%;
+  float: left;
+  width: 33%;
+}
+.warningsTable{
+  width: 33%;
+}
+.planInformation{
+  //display: flex;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
 }

@@ -176,24 +176,24 @@ public class PlanAnalizator {
             if(lift.getRpe()>=0)
             {
                 if (lift.getRpe() == 0){
-                    prilepinsTableView.addToRepsFor55to65(lift.getReps());
+                    prilepinsTableView.addToRepsFor55to65(lift.getReps() * lift.getSets());
                     if(lift.getReps()>6)
                         prilepinsTableView.addWarning("Too many reps for 55-65% range");
                 }
                 else if (lift.getIntensity()>= 0.9) {
-                    prilepinsTableView.addToRepsForOver90(lift.getReps());
+                    prilepinsTableView.addToRepsForOver90(lift.getReps() * lift.getSets());
                     if(lift.getReps()>2)
                         prilepinsTableView.addWarning("Too many reps for 90% range");
                 }
                 else if (lift.getIntensity()< 0.9 && lift.getIntensity()>= 0.8){
-                    prilepinsTableView.addToRepsFor80to90(lift.getReps());
+                    prilepinsTableView.addToRepsFor80to90(lift.getReps() * lift.getSets());
                     if(lift.getReps()>4)
                         prilepinsTableView.addWarning("Too many reps for 90-80% range");
                     if(lift.getReps()<2)
                         prilepinsTableView.addWarning("Not enough reps for 90-80% range");
                 }
                 else if (lift.getIntensity()< 0.8 && lift.getIntensity()>= 0.7){
-                    prilepinsTableView.addToRepsFor80to90(lift.getReps());
+                    prilepinsTableView.addToRepsFor80to90(lift.getReps() * lift.getSets());
                     if(lift.getReps()>6)
                         prilepinsTableView.addWarning("Too many reps for 80-70% range");
                     if(lift.getReps()<3){

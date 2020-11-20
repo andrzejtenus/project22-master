@@ -47,8 +47,29 @@ export class PlansService {
     return this.httpClient.get<StrengthTypes>(environment.apiUrl+
       '/api/plans/user/strength_types',{params})
   }
+  public getPlanInformation(start: string, end: string, id: Number): Observable<PlanInformation>{
+    const params = new HttpParams()
+      .set('id', id.toString())
+      .set('start', start)
+      .set('end', end);
+    return this.httpClient.get<PlanInformation>(environment.apiUrl+
+      '/api/plans/user/prilepins_table_view',{params})
+  }
 
-
+}
+export interface PlanInformation {
+  minPercent: number;
+  maxPercent: number;
+  optPercent: number;
+  repsFor55to65: number;
+  repsFor70to80: number;
+  repsFor80to90: number;
+  repsForOver90: number;
+  percentFor55to65: number;
+  percentFor70to80: number;
+  percentFor80to90: number;
+  percentForOver90: number;
+  warnings: any[];
 }
 export interface StrengthTypes {
   volumeForMaximalStrength: number;

@@ -1,5 +1,5 @@
 <div class="fullPage">
-<div class="halfPage">
+<div class="tablePageSize">
   <button class="change_day_button" mat-raised-button color="accent" (click)="previousDay()" >
     <mat-icon>navigate_before</mat-icon>
   </button>
@@ -79,10 +79,37 @@
     <mat-icon>save</mat-icon>
     save
   </button>
+
+  <div class="planInformation">
+    <div class="dupa">
+      <mat-form-field appearance="fill">
+        <mat-label>Exercise</mat-label>
+        <mat-select [(ngModel)]="mainLiftForDay" (selectionChange)="initInformatrion()">
+          <mat-option *ngFor="let exercise of mainLiftsForDay" [value]="exercise">
+            {{exercise.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <p>dupa</p>
+      <p>dupa</p>
+      <p>dupa</p>
+    </div>
+
+
+
+    <table mat-table [dataSource]="planInformatrion.warnings" class="warningsTable">
+      <ng-container matColumnDef="Warnings">
+        <th mat-header-cell *matHeaderCellDef> Warnings </th>
+        <td mat-cell *matCellDef="let element"> {{element}}
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedWarnings"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedWarnings;"></tr>
+    </table>
+  </div>
 </div>
 
-<div class="halfPage">
-<p-chart type="line" [data]="data"></p-chart>
+<div class="chartPageSize">
+<p-chart class="lineChart" type="line" [data]="data"></p-chart>
 
   <mat-form-field appearance="fill" class="selectChartType">
     <mat-label>Chart Lift Type</mat-label>
@@ -117,16 +144,19 @@
     Apply
   </button>
 
+  <div class="pieChart">
+    <canvas id="myLiftTypeChart"></canvas>
+  </div>
+  <div class="pieChart">
+    <canvas id="myOptimalRangeChart"></canvas>
+  </div>
+  <div class="pieChart">
+    <canvas id="myStrengthTypesChart"></canvas>
+  </div>
+
 </div>
 </div>
 <div class="fullPage">
-
-  <div class="pieChart">
-    <canvas class="pieChart" id="myLiftTypeChart"></canvas>
-  </div>
-  <div class="pieChart">
-    <canvas class="pieChart" id="myStrengthTypesChart"></canvas>
-  </div>
 
 
 
