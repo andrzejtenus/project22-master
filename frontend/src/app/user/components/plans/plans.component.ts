@@ -24,7 +24,20 @@ import { timer } from 'rxjs';
 })
 export class PlansComponent implements OnInit {
 
-  planInformatrion:PlanInformation;
+  planInformatrion:PlanInformation ={
+    minPercent: 0,
+    maxPercent: 0,
+    optPercent: 0,
+    repsFor55to65: 0,
+    repsFor70to80: 0,
+    repsFor80to90: 0,
+    repsForOver90: 0,
+    percentFor55to65: 0,
+    percentFor70to80: 0,
+    percentFor80to90: 0,
+    percentForOver90: 0,
+    warnings: []
+  };
   exerciseStrengthTypesChartData:StrengthTypes;
   volumeToIntensityChartData: VolumeToIntensityChartData;
   volumePieChartData: VolumesByType = {
@@ -292,6 +305,6 @@ export class PlansComponent implements OnInit {
   }
 
   initInformatrion() {
-    console.log(this.mainLiftForDay);
+    this.initPlanInformations();
   }
 }

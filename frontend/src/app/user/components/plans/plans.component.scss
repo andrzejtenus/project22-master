@@ -1,58 +1,88 @@
-div.fullPage{
-  display: flex;
-  justify-content: space-evenly;
+html {
+  box-sizing: border-box;
 }
 
-div.chartPageSize{
-  width: 59%;
-  margin: 0.5%;
+*, ::before, ::after {
+  box-sizing: inherit;
 }
+.container{
+  padding: 10px;
 
-div.tablePageSize{
-  width: 39%;
-  margin: 0.5%;
 }
-table {
+.lineChart{
   width: 100%;
 }
-.days_button
-{
-  width: 70%;
+@media (max-width: 920px) {
+  .container {
+    max-width: 100%;
+  }
 }
-.change_day_button{
-  width: 15%;
-}
-.selectType{
-  width: 17.5%;
-}
-.selectExercise{
-  width: 17.5%;
-}
-.input{
-  width: 12.5%;
-}
-.savePlan{
-  width: 15%;
-}
-
-.selectChartType{
-  width: 20%;
-}
-.doubleSelect{
-  width: 50%;
-}
-.Apply{
-  width: 10%;
-}
-.pieChart{
-  float: left;
-  width: 33%;
+.planTable{
+  width: 100%;
 }
 .warningsTable{
-  width: 33%;
+  width: 100%;
 }
-.planInformation{
-  //display: flex;
+
+.tableContainer{
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 6fr 10fr;
+  gap: 10px;
+  max-width: 100%;
 }
+
+@media (max-width: 920px) {
+.tableContainer{
+  grid-template-columns: 1fr;
+}
+
+}
+.overTableButtons{
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+
+.tableDiv{
+  display: grid;
+  grid-template-columns: 1fr;
+}
+.underTableInputs{
+  align-items: center;
+  justify-content: center;
+}
+.input{
+  width: 25%;
+}
+
+.underTableInputsSet1{
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr;
+  align-items: center;
+  justify-content: center;
+}
+
+.lineChartInputs{
+  display: grid;
+  grid-template-columns: 2fr 2fr 2fr 1fr;
+  align-items: center;
+  justify-content: center;
+}
+.pieCharts{
+  display: flex;
+}
+.pieChart{
+  width: 33.3%;
+}
+.chartPlanInformationDiv{
+  display: grid;
+  grid-template-columns:  1fr 4fr;
+}
+.information{
+  font-size: 12px;
+  padding: 0px 20px;
+}
+.informations{
+  box-shadow: 0px 0px 5px #ccc;
+  padding-top: 5px;
+}
+
