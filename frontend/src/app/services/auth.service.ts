@@ -14,7 +14,7 @@ export class AuthService {
     request.subscribe(res => {
       localStorage.setItem('currentUser', JSON.stringify(res.tokenType + ' ' + res.accessToken));
     }, err => {
-        console.log('dupa');
+        console.log('login error');
       }
     );
     return request;
@@ -29,3 +29,4 @@ export interface Token {
   accessToken: string;
   tokenType: string;
 }
+

@@ -8,10 +8,6 @@ import project.logic.models.Plan;
 import java.util.ArrayList;
 import java.util.List;
 
-
-///////////////////////////////////////////////
-//KOMPILACJA POFAJDANYCH FUNKCJI DO REFAKTORU//
-///////////////////////////////////////////////
 @Component
 public class PlanAnalyzer {
 
@@ -193,7 +189,7 @@ public class PlanAnalyzer {
                         prilepinsTableView.addWarning("Not enough reps for 90-80% range");
                 }
                 else if (lift.getIntensity()< 0.8 && lift.getIntensity()>= 0.7){
-                    prilepinsTableView.addToRepsFor80to90(lift.getReps() * lift.getSets());
+                    prilepinsTableView.addToRepsFor70to80(lift.getReps() * lift.getSets());
                     if(lift.getReps()>6)
                         prilepinsTableView.addWarning("Too many reps for 80-70% range");
                     if(lift.getReps()<3){

@@ -45,7 +45,4 @@ public class GlobalExceptionHandler {
 				new ErrorDetails(new Date(), exception.getMessage(), request.getDescription(false));
 		return new ResponseEntity<>(errorDetails, HttpStatus.FORBIDDEN);
 	}
-
-
-
 }
